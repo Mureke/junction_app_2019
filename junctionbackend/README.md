@@ -11,7 +11,7 @@
     1. Create database named "junction"
         `CREATE DATABASE junction WITH OWNER junction_man`
     3. Set "junction_man" as "junction" database owner
-    4. `Alter role junction_man SUPERUSER`
+    4. `ALTER ROLE junction_man SUPERUSER`
 
 3. `sudo apt-get install binutils libproj-dev gdal-bin` 
 3. Go to project root and run `python manage.py migrate`
