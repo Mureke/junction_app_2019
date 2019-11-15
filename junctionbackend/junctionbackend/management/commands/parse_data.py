@@ -2,7 +2,7 @@ from django.core.management.base import BaseCommand
 import logging
 import csv
 from django.db.utils import IntegrityError
-from models import ParkVisits, Counter, NationalPark
+from junctionbackend.models import ParkVisits, Counter, NationalPark
 
 
 class Command(BaseCommand):
