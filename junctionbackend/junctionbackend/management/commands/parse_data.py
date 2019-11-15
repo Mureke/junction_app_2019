@@ -3,6 +3,7 @@ import logging
 import csv
 from django.db.utils import IntegrityError
 from junctionbackend.models import ParkVisits, Trail, NationalPark
+import datetime
 
 class Command(BaseCommand):
     help = "Parse Data"
@@ -23,9 +24,10 @@ class Command(BaseCommand):
                 reader = csv.DictReader(f, dialect=CustomDialect)
                 for row in reader:
                     try:
-                        counter = Trail.objects.filter(counter_id_asta=row['CounterID_ASTA']).first()
-                        park_visit = ParkVisits(start_time=row['StartTime'], end_time=row['EndTime'],
-                                                visits=row['Visits'], counter=counter)
+                        trail = Trail.objects.filter(counter_id_asta=row['CounterID_ASTA']).first()
+                        start_date = datetime.datetime.strptime(row['StartTime'], '%d/%m/%Y %H:%M')
+                        end_date = datetime.datetime.strptime(row['StartTime'], '%d/%m/%Y %H:%M')
+                        park_visit = ParkVisits(start_time=start_date, end_time=end_date, visits=row['Visits'], trail=trail)
                         park_visit.save()
                         new_entries += 1
 
