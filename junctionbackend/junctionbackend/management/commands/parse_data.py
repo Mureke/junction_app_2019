@@ -20,7 +20,7 @@ class Command(BaseCommand):
 
         try:
             with open(options['csv']) as f:
-                reader = csv.DictReader(f, dialect='excel')
+                reader = csv.DictReader(f, dialect=CustomDialect)
                 for row in reader:
                     try:
                         counter = Trail.objects.filter(counter_id_asta=row['CounterID_ASTA']).first()
@@ -45,4 +45,15 @@ class Command(BaseCommand):
             exit(0)
 
         print("Added " + str(new_entries) + " new entries. Skipped " + str(skipped_entries) + " existing entries")
+
+class CustomDialect(csv.Dialect):
+    delimiter = ';'
+    quotechar = '"'
+    doublequote = True
+    skipinitialspace = False
+    lineterminator = '\n'
+    quoting = csv.QUOTE_ALL
+
+
+csv.register_dialect("custom", CustomDialect)
 

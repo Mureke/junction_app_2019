@@ -2,12 +2,12 @@ from django.core.management.base import BaseCommand
 import logging
 import csv
 from django.db.utils import IntegrityError
-from junctionbackend.models import Counter, NationalPark
+from junctionbackend.models import Trail, NationalPark
 from django.contrib.gis.geos.point import Point
 from junctionbackend.utils import geo_converter
 PARK_NAMES = {
-    852: 'Nuuksio National Park',
-    34361: 'Pallas-Yllästunturi National Park'
+    "852": 'Nuuksio National Park',
+    "34361": 'Pallas-Yllästunturi National Park'
 }
 
 
@@ -26,14 +26,14 @@ class Command(BaseCommand):
 
         try:
             with open(options['csv']) as f:
-                reader = csv.DictReader(f, dialect='excel')
+                reader = csv.DictReader(f, dialect=CustomDialect)
                 for row in reader:
                     try:
-                        national_park = NationalPark.objects.get_or_create(national_park_code=row['ASTA_Counter.NationalParkCode'], name=PARK_NAMES[row['ASTA_Counter.NationalParkCode']])
+                        national_park = NationalPark.objects.get_or_create(national_park_code=row['ASTA_Counters.NationalParkCode'], name=PARK_NAMES[row['ASTA_Counters.NationalParkCode']])
                         lat, long = geo_converter.convert_espg3067(row['PAVE_Counters.CoordinateNorth'], row['PAVE_Counters.CoordinateEast'])
-                        trail = Counter(counter_id_asta=row['CountID_ASTA'], name=row['ASTA_Counters.Name_ASTA'],
+                        trail = Trail(counter_id_asta=row['CounterID_ASTA'], name=row['ASTA_Counters.Name_ASTA'],
                                           location=Point(x=lat, y=long),
-                                          national_park=national_park)
+                                          national_park=national_park[0])
                         trail.save()
                         new_entries += 1
 
@@ -55,3 +55,13 @@ class Command(BaseCommand):
         print("Added " + str(new_entries) + " new entries. Skipped " + str(skipped_entries) + " existing entries")
 
 
+class CustomDialect(csv.Dialect):
+    delimiter = ';'
+    quotechar = '"'
+    doublequote = True
+    skipinitialspace = False
+    lineterminator = '\n'
+    quoting = csv.QUOTE_ALL
+
+
+csv.register_dialect("custom", CustomDialect)
