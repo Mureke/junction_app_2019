@@ -2,7 +2,8 @@ from django.core.management.base import BaseCommand
 import logging
 import csv
 from django.db.utils import IntegrityError
-from models import ParkVisits, Counter, NationalPark
+from models import Counter, NationalPark
+from django.contrib.gis.geos.point import Point
 
 
 class Command(BaseCommand):
@@ -24,11 +25,11 @@ class Command(BaseCommand):
                 reader = csv.DictReader(f, dialect='excel')
                 for row in reader:
                     try:
-                        counter = Counter.objects.filter(counter_id_asta=row['CounterID_ASTA']).first()
-                        park_visit = ParkVisits(start_time=row['StartTime'], end_time=row['EndTime'],
-                                                visits=row['Visits'], counter=counter)
-                        park_visit.save()
-                        new_entries += 1
+                        counter = Counter(counter_id_asta=row['CountID_ASTA'], name=row['ASTA_Counters.Name_ASTA'],
+                                          location=Point(x=row['PAVE_Counters.CoordinateEast'], y=row['PAVE_Counters.CoordinateNorth']),
+                                          national_park=NationalPark.object.filter(national_park_code=row['ASTA_Counters.NationalParkCode']))
+                        counter.save()
+                        new_entries += 1;
 
                     except IntegrityError:
                         logging.info("Duplicate entry, skipping")
@@ -46,4 +47,5 @@ class Command(BaseCommand):
             exit(0)
 
         print("Added " + str(new_entries) + " new entries. Skipped " + str(skipped_entries) + " existing entries")
+
 
