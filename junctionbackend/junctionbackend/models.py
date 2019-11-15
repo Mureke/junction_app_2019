@@ -16,7 +16,7 @@ class Counter(models.Model):
     counter_id_asta = models.CharField(max_length=250, null=False, blank=False)
     name = models.CharField(max_length=300, unique=True)
     location = models.PointField(null=False)
-    national_park_code = models.ForeignKey('NationalPark', on_delete=models.CASCADE)
+    national_park = models.ForeignKey('NationalPark', on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'junction_counter'
