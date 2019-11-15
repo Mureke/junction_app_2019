@@ -2,7 +2,7 @@ from django.core.management.base import BaseCommand
 import logging
 import csv
 from django.db.utils import IntegrityError
-from models import Counter, NationalPark
+from junctionbackend.models import Counter, NationalPark
 from django.contrib.gis.geos.point import Point
 
 
