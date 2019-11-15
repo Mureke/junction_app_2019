@@ -6,6 +6,7 @@ from junctionbackend.models import ParkVisits, Trail, NationalPark
 import datetime
 from junctionbackend.utils import geo_converter
 from django.contrib.gis.geos.point import Point
+from django.db.transaction import atomic
 
 PARK_NAMES = {
     "852": 'Nuuksio National Park',
@@ -37,7 +38,11 @@ class Command(BaseCommand):
         try:
             with open(options['csv']) as f:
                 reader = csv.DictReader(f, dialect=CustomDialect)
+                counter = 0
                 for row in reader:
+                    counter += 1
+                    print(counter)
+
                     try:
                         national_park = NationalPark.objects.get_or_create(national_park_code=row['ASTA_Counters.NationalParkCode'], name=PARK_NAMES[row['ASTA_Counters.NationalParkCode']])
                         lat, long = geo_converter.convert_espg3067(row['PAVE_Counters.CoordinateNorth'], row['PAVE_Counters.CoordinateEast'])
@@ -46,7 +51,7 @@ class Command(BaseCommand):
                                                             national_park=national_park[0])
                         start_date = datetime.datetime.strptime(row['StartTime'], '%d/%m/%Y %H:%M')
                         end_date = datetime.datetime.strptime(row['StartTime'], '%d/%m/%Y %H:%M')
-                        park_visit = ParkVisits(start_time=start_date, end_time=end_date, visits=row['Visits'], trail=trail)
+                        park_visit = ParkVisits(start_time=start_date, end_time=end_date, visits=row['Visits'], trail=trail[0])
                         park_visit.save()
                         new_entries += 1
 
@@ -55,10 +60,8 @@ class Command(BaseCommand):
                         skipped_entries += 1
                         continue
 
-                    except TypeError as e:
-                        logging.error("Invalid field names in CSV file." + str(e))
-                        print("Invalid field names in CSV file!")
-                        exit(0)
+                    except Exception as e:
+                        continue
 
         except FileNotFoundError:
             logging.error("File not found:" + options['csv'])
