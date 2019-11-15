@@ -2,7 +2,7 @@ from django.core.management.base import BaseCommand
 import logging
 import csv
 from django.db.utils import IntegrityError
-from models import ParkVisits, Counter, NationalPark
+from junctionbackend.models import ParkVisits, Trail, NationalPark
 
 
 class Command(BaseCommand):
@@ -24,7 +24,7 @@ class Command(BaseCommand):
                 reader = csv.DictReader(f, dialect='excel')
                 for row in reader:
                     try:
-                        counter = Counter.objects.filter(counter_id_asta=row['CounterID_ASTA']).first()
+                        counter = Trail.objects.filter(counter_id_asta=row['CounterID_ASTA']).first()
                         park_visit = ParkVisits(start_time=row['StartTime'], end_time=row['EndTime'],
                                                 visits=row['Visits'], counter=counter)
                         park_visit.save()

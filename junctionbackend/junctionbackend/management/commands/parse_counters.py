@@ -10,6 +10,7 @@ PARK_NAMES = {
     34361: 'Pallas-Yllästunturi National Park'
 }
 
+
 class Command(BaseCommand):
     help = "Parse Data"
 
@@ -30,10 +31,10 @@ class Command(BaseCommand):
                     try:
                         national_park = NationalPark.objects.get_or_create(national_park_code=row['ASTA_Counter.NationalParkCode'], name=PARK_NAMES[row['ASTA_Counter.NationalParkCode']])
                         lat, long = geo_converter.convert_espg3067(row['PAVE_Counters.CoordinateNorth'], row['PAVE_Counters.CoordinateEast'])
-                        counter = Counter(counter_id_asta=row['CountID_ASTA'], name=row['ASTA_Counters.Name_ASTA'],
+                        trail = Counter(counter_id_asta=row['CountID_ASTA'], name=row['ASTA_Counters.Name_ASTA'],
                                           location=Point(x=lat, y=long),
                                           national_park=national_park)
-                        counter.save()
+                        trail.save()
                         new_entries += 1
 
                     except IntegrityError:
