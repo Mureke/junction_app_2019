@@ -22,6 +22,22 @@ class Trail(models.Model):
         db_table = 'junction_counter'
 
 
+class TrailTag(models.Model):
+    trail = models.ForeignKey('Trail', on_delete=models.CASCADE)
+    tag = models.ForeignKey('Tag', on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = 'junction_trail_tag'
+
+
+class Tag(models.Model):
+    name = models.CharField(max_length=400, unique=True)
+    icon_url = models.CharField(max_length=400, null=True, blank=False)
+
+    class Meta:
+        db_table = 'junction_tag'
+
+
 class NationalPark(models.Model):
     national_park_code = models.IntegerField()
     name = models.CharField(max_length=300)
