@@ -5,7 +5,7 @@
     2. `docker pull mdillon/postgis`
     3. `docker run --name possu-postgres -p 9876:5432 -e POSTGRES_PASSWORD=pass -d mdillon/postgis`
 
-2. `psql -U postgres -p 9876 -h 0.0.0`
+2. `psql -U postgres -p 9876 -h 0.0.0.0`
     2. Create user named "junction_man" with password "pass"
         `CREATE USER junction_man;` and `ALTER USER junction_man WITH password 'pass';`
     1. Create database named "junction"

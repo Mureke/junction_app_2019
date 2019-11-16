@@ -4,6 +4,7 @@ RUN apt-get update
 
 ENV PYTHONUNBUFFERED 1
 ENV work_dir /app
+ENV DJANGO_SETTINGS_MODULE junctionbackend.settings-docker
 RUN mkdir -p ${work_dir}
 WORKDIR ${work_dir}
 
@@ -17,7 +18,7 @@ COPY deployment/nginx-global.conf /etc/nginx/nginx.conf
 COPY deployment/nginx-app.conf /etc/nginx/conf.d/default.conf
 COPY deployment/supervisor.ini /etc/supervisor.d/supervisor.ini
 
-EXPOSE 80 443
+EXPOSE 80 443 9876
 
 ADD requirements.txt ${work_dir}
 
