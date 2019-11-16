@@ -1,0 +1,20 @@
+.introduction-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+
+  article {
+    position: absolute;
+    display: flex;
+    width: 50%;
+    justify-content: flex-start;
+    top: 25%;
+
+    &:last-of-type {
+      align-self: flex-end;
+      bottom: 25%;
+      top: auto;
+    }
+  }
+}
