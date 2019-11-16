@@ -26,9 +26,8 @@ export class PostcardsComponent implements OnInit {
   }
 
   async getTrails(selections) {
-    const url = environment.backendUrl + '/api/trails/find/' + selections.park + '/?tags=' + selections.tags.join(',') + '&start_date=' + selections.start_date;
-    console.log(url);
-
+    const url = environment.backendUrl + '/api/trails/find/' + selections.park + '/?tags=' + selections.tags.join(',') +  '&start_date=' + selections.start_date;
+    // const url = 'http://localhost:8000/api/trails/find/5/?tags=13,14,16,18&start_date=2004-07-22'
     this.trails = await this.dataService.fetchDataGet(url);
   }
 
