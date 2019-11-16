@@ -38,6 +38,21 @@ class Tag(models.Model):
         db_table = 'junction_tag'
 
 
+class TrailQuestion(models.Model):
+    trail = models.ForeignKey('Trail', on_delete=models.CASCADE)
+    tag = models.ForeignKey('Question', on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = 'junction_trail_question'
+
+
+class Question(models.Model):
+    question = models.CharField(max_length=900, unique=True)
+
+    class Meta:
+        db_table = 'junction_question'
+
+
 class NationalPark(models.Model):
     national_park_code = models.IntegerField()
     name = models.CharField(max_length=300)
