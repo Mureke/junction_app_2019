@@ -2,8 +2,8 @@ from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.viewsets import ReadOnlyModelViewSet
 
-from junctionbackend.models import NationalPark, Tag, Question
-from junctionbackend.serializers import NationalParkSerializer, TagSerializer, QuestionSerializer
+from junctionbackend.models import NationalPark, Tag, Question, Trail
+from junctionbackend.serializers import NationalParkSerializer, TagSerializer, QuestionSerializer, TrailSerializer
 
 
 class NationalParkViewSet(ReadOnlyModelViewSet):
@@ -49,4 +49,19 @@ class QuestionViewSet(ReadOnlyModelViewSet):
         queryset = self.get_queryset()
         obj = get_object_or_404(queryset, pk=pk)
         serializer = QuestionSerializer(obj)
+        return Response(serializer.data)
+
+
+class TrailViewSet(ReadOnlyModelViewSet):
+    queryset = Trail.objects.all()
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        serializer = TrailSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+    def retrieve(self, request, pk=None, *args, **kwargs):
+        queryset = self.get_queryset()
+        obj = get_object_or_404(queryset, pk=pk)
+        serializer = TrailSerializer(obj)
         return Response(serializer.data)
