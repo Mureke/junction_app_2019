@@ -12,7 +12,7 @@ export class TimeAndPlaceComponent implements OnInit, OnDestroy {
   @Output()
   viewEmitter: EventEmitter<number> = new EventEmitter();
 
-  constructor(private selectionService: SelectionsService, private fetcData: FetchDataService) {
+  constructor(private selectionService: SelectionsService, private fetcDataService: FetchDataService) {
   }
 
   public spring = false;
@@ -36,7 +36,7 @@ export class TimeAndPlaceComponent implements OnInit, OnDestroy {
   }
 
   async getParks() {
-    this.parks = await this.fetcData.fetchDataGet('http://localhost:8000/api/national-park/');
+    this.parks = await this.fetcDataService.fetchDataGet('http://localhost:8000/api/national-park/');
   }
 
   changeView(view: number) {
