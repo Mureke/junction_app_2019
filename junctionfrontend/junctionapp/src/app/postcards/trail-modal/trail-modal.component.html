@@ -1,8 +1,8 @@
 <div class="trail-wrapper">
   <span class="close" (click)="close()">close</span>
   <h2>{{trail['name'] }}</h2>
-  <div class="map"></div>
   <div class="content">
+    <img src="./assets/images/map.png" alt="map" />
     <div class="start">
       <p>Suggested start</p>
       <h3>{{date}} <span class="primary">10:00</span></h3>
@@ -17,5 +17,15 @@
     Atque in cumque velit itaque nostrum incidunt. Assumenda nobis quod ullam eligendi tempora ea dolores perferendis voluptatum atque facere possimus velit, tenetur recusandae. Exercitationem, autem quod ratione culpa molestias non.
     Numquam illum obcaecati dolore, voluptatum, quia sint maxime incidunt culpa fugiat ullam, explicabo voluptate iure nostrum veritatis eveniet eligendi quod id officiis. Eius maiores ipsa, modi deleniti dolorem tenetur odit!
     Facilis dolorem aut, quia iure harum fuga quibusdam, doloremque aliquid, vero esse est nobis! Enim dolore porro sit tempore modi, ipsum eius ea odit repudiandae dicta doloremque unde! Eligendi, obcaecati!</p>
+    <div class="charasteristics">
+      <h3>Charasteristics</h3>
+      <div class="tags">
+        <div class="tag" *ngFor="let tag of trail.tags"><span [innerHTML]="tag.icon_url"></span></div>
+      </div>
+      <div class="tags parking">
+        <span class="bold tag">P</span>
+        <span>Parking lot available</span>
+      </div>
+    </div>
   </div>
 </div>

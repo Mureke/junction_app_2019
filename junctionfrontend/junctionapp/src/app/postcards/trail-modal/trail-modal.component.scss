@@ -32,7 +32,14 @@
     padding: 24px 0;
     height: 466px;
 
+    img {
+      height: auto;
+      width: 100%;
+    }
+
     .start {
+      margin-top: 24px;
+
       p {
         font-size: $font-small;
       }
@@ -92,6 +99,49 @@
 
     .lorem {
       font-size: $font-small;
+    }
+
+    .charasteristics {
+      h3 {
+        font-weight: 700;
+      }
+
+      .tags {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        padding: 12px;
+  
+        .tag {
+          @include icon-button;
+          cursor: default;
+          background: transparent;
+          border: none;
+          box-shadow: none;
+          width: 24px;
+          height: 24px;
+          margin: 12px;
+          padding: 0;
+  
+          &:hover, &:active {
+            background: transparent;
+            border: none;
+            box-shadow: none;
+          }
+        }
+
+        &.parking {
+          span {
+            display: flex;
+            align-items: center;
+          }
+
+          .bold {
+            color: $primary-default;
+            font-weight: 700;
+          }
+        }
+      }
     }
   }
 }
