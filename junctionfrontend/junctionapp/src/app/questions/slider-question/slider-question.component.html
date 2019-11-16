@@ -1,6 +1,6 @@
 <h2>{{question.question}}</h2>
 
-<p>{{currentSelecion}} {{question.current_selection_help_text}}</p>
+<p *ngIf="question.current_selection_help_text">{{currentSelecion}} {{question.current_selection_help_text}}</p>
 
 <div class="labels">
   <p>{{question.minLabel}}</p>
