@@ -496,7 +496,8 @@ CREATE TABLE public.junction_question (
     slider boolean NOT NULL,
     max_label character varying(100),
     min_label character varying(100),
-    range_length integer
+    range_length integer,
+    slider_value_visible boolean NOT NULL
 );
 
 
@@ -894,6 +895,8 @@ COPY public.django_admin_log (id, action_time, object_id, object_repr, action_fl
 40	2019-11-16 14:33:42.213079+00	17	Tag object (17)	1	[{"added": {}}]	10	1
 41	2019-11-16 14:33:59.140416+00	18	Tag object (18)	1	[{"added": {}}]	10	1
 42	2019-11-16 14:34:11.50028+00	19	Tag object (19)	1	[{"added": {}}]	10	1
+43	2019-11-16 15:11:19.581606+00	5	My goal is to..	2	[{"changed": {"fields": ["slider"]}}]	13	1
+44	2019-11-16 15:11:38.694332+00	2	My skill level is:	2	[{"changed": {"fields": ["slider_value_visible"]}}]	13	1
 \.
 
 
@@ -950,6 +953,7 @@ COPY public.django_migrations (id, app, name, applied) FROM stdin;
 25	junctionbackend	0008_auto_20191116_1334	2019-11-16 13:34:45.852672+00
 26	junctionbackend	0009_auto_20191116_1336	2019-11-16 13:36:13.873132+00
 27	junctionbackend	0010_tag_question	2019-11-16 14:23:25.63968+00
+28	junctionbackend	0011_question_slider_value_visible	2019-11-16 15:10:56.808847+00
 \.
 
 
@@ -7466,15 +7470,15 @@ COPY public.junction_park_visitors (id, start_time, end_time, visits, trail_id) 
 -- Data for Name: junction_question; Type: TABLE DATA; Schema: public; Owner: junction_man
 --
 
-COPY public.junction_question (id, question, slider, max_label, min_label, range_length) FROM stdin;
-3	How long of a trip are you planning?	t	14 Nights	0 Nights	14
-2	My skill level is:	t	Swiss knife	All Thumbs	4
-5	My goal is to..	f	Excersise	Chill	2
-6	Which do you prefer?	f	\N	\N	0
-7	My travelling posse is...	f	\N	\N	0
-8	Please notice my special needs for	f	\N	\N	0
-9	I'm travelling with	f	\N	\N	0
-4	Which activities interest you?	f	\N	\N	0
+COPY public.junction_question (id, question, slider, max_label, min_label, range_length, slider_value_visible) FROM stdin;
+3	How long of a trip are you planning?	t	14 Nights	0 Nights	14	f
+6	Which do you prefer?	f	\N	\N	0	f
+7	My travelling posse is...	f	\N	\N	0	f
+8	Please notice my special needs for	f	\N	\N	0	f
+9	I'm travelling with	f	\N	\N	0	f
+4	Which activities interest you?	f	\N	\N	0	f
+5	My goal is to..	t	Excersise	Chill	2	f
+2	My skill level is:	t	Swiss knife	All Thumbs	4	t
 \.
 
 
@@ -7916,7 +7920,7 @@ SELECT pg_catalog.setval('public.auth_user_user_permissions_id_seq', 1, false);
 -- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: junction_man
 --
 
-SELECT pg_catalog.setval('public.django_admin_log_id_seq', 42, true);
+SELECT pg_catalog.setval('public.django_admin_log_id_seq', 44, true);
 
 
 --
@@ -7930,7 +7934,7 @@ SELECT pg_catalog.setval('public.django_content_type_id_seq', 13, true);
 -- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: junction_man
 --
 
-SELECT pg_catalog.setval('public.django_migrations_id_seq', 27, true);
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 28, true);
 
 
 --

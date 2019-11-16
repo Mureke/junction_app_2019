@@ -70,9 +70,9 @@ class TrailViewSet(ReadOnlyModelViewSet):
     @api_view(['GET',])
     def matching_trails(self, park_id):
         trails = Trail.objects.all().filter(national_park_id=park_id)
-        tag_ids = self.GET.get('tags')
+        tag_ids = self.GET.get('tags', None)
 
         if tag_ids:
-            trails.filter(trailtag__tag_id__in=tag_ids)
+            trails.filter(trailtag__tag_id__in=tag_ids.split(','))
 
         return Response(trails.count())
