@@ -27,6 +27,11 @@ class QuestionSerializer(serializers.ModelSerializer):
     question = serializers.CharField()
     slider = serializers.BooleanField()
 
+    min_label = serializers.CharField()
+    max_label = serializers.CharField()
+
+    range_length = serializers.IntegerField(required=False)
+
     class Meta:
         model = Question
         fields = '__all__'

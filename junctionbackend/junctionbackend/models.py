@@ -49,6 +49,9 @@ class TrailQuestion(models.Model):
 class Question(models.Model):
     question = models.CharField(max_length=900, unique=True)
     slider = models.BooleanField(default=False)  # Frontend stuff :)
+    min_label = models.CharField(max_length=100, null=True, blank=True)
+    max_label = models.CharField(max_length=100, null=True, blank=True)
+    range_length = models.IntegerField(null=True, default=0)
 
     class Meta:
         db_table = 'junction_question'
