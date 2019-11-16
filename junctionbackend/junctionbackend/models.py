@@ -63,6 +63,7 @@ class Question(models.Model):
     max_label = models.CharField(max_length=100, null=True, blank=True)
     range_length = models.IntegerField(null=True, default=0)
     slider_value_visible = models.BooleanField(default=False)
+    ordinal = models.IntegerField(default=0)
 
     def __str__(self):
         return self.question
