@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from junctionbackend.models import NationalPark, Tag, Question
+from junctionbackend.models import NationalPark, Tag, Question, TrailTag
 
 
 class NationalParkSerializer(serializers.ModelSerializer):
@@ -42,6 +42,14 @@ class TrailSerializer(serializers.ModelSerializer):
     name = serializers.CharField()
     national_park = serializers.SerializerMethodField()
     location = serializers.SerializerMethodField()
+    tags = serializers.SerializerMethodField()
+
+    def get_tags(self, obj: Tag):
+        trail_tags = TrailTag.objects.filter(trail=obj).values_list('tag', flat=True)
+        if trail_tags:
+            tags = Tag.objects.filter(pk__in=set(list(trail_tags)))
+            return TagSerializer(tags, many=True).data
+        return None
 
     def get_location(self, obj):
         return {'lat': obj.location.x, 'long': obj.location.y}
