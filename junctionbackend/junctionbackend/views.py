@@ -39,7 +39,7 @@ class TagViewSet(ReadOnlyModelViewSet):
 
 
 class QuestionViewSet(ReadOnlyModelViewSet):
-    queryset = Question.objects.all()
+    queryset = Question.objects.all().order_by('ordinal')
 
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
