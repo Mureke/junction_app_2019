@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -8,12 +8,25 @@ export class FetchDataService {
   constructor(private http: HttpClient) {
   }
 
-  async fetchData(url: string, params: object): Promise<object> {
+  prepareHeaders(method: string = null) {
+    let headers = new HttpHeaders();
+    headers = headers.set('Content-Type', 'application/json');
+    headers = headers.set('Access-Control-Allow-Headers', '*');
+
+
+    return headers;
+  }
+
+  async fetchDataGet(url: string) {
     try {
-      const response = await this.http.post(url, params).toPromise();
-      return response;
+      return await this.http.get(url, {headers: this.prepareHeaders()}).toPromise().then(resp => {
+        return resp;
+      });
     } catch (error) {
+      console.log(error);
       throw error;
     }
   }
+
 }
+

@@ -9,6 +9,7 @@ import { QuestionsComponent } from './questions/questions.component';
 import { PostcardsComponent } from './postcards/postcards.component';
 import { SliderQuestionComponent } from './questions/slider-question/slider-question.component';
 import { TagQuestionComponent } from './questions/tag-question/tag-question.component';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -19,12 +20,13 @@ import { TagQuestionComponent } from './questions/tag-question/tag-question.comp
     QuestionsComponent,
     PostcardsComponent,
     SliderQuestionComponent,
-    TagQuestionComponent
+    TagQuestionComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [HttpClient, HttpClientModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
