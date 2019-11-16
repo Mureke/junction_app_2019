@@ -3,6 +3,7 @@ import { FetchDataService } from '../../services/fetch-data.service';
 import { SelectionsService } from '../../services/selections.service';
 import { environment } from '../../environments/environment';
 import { Subscription } from 'rxjs';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-postcards',
@@ -18,7 +19,7 @@ export class PostcardsComponent implements OnInit, OnDestroy {
   public selectedTrail: object;
   public selections: Selections;
 
-  constructor(private dataService: FetchDataService, private selectionService: SelectionsService) {
+  constructor(private dataService: FetchDataService, private selectionService: SelectionsService, private sanitizer: DomSanitizer) {
   }
 
   ngOnInit(): void {
@@ -35,6 +36,14 @@ export class PostcardsComponent implements OnInit, OnDestroy {
   async getTrails(selections) {
     const url = environment.backendUrl + '/api/trails/find/' + selections.park + '/?tags=' + selections.tags.join(',') +  '&start_date=' + selections.start_date;
     this.trails = await this.dataService.fetchDataGet(url);
+    this.trails.forEach(trail => {
+      trail.tags = trail.tags.map(tag => {
+        tag.icon_url = this.sanitizer.bypassSecurityTrustHtml(tag.icon_url);
+        return tag;
+      });
+    });
+    console.log(this.trails);
+    
   }
 
   changeView(view: number) {

@@ -4,7 +4,7 @@
     <img class="post-card-image" src="https://www.napsu.fi/images/artikkelit/117-0.jpg?v=1">
     <h4>{{trail.name}}</h4>
     <div class="tags">
-      <div class="tag" *ngFor="let tag of trail.tags"><div [innerHTML]="tag.tag_url"></div></div>
+      <div class="tag" *ngFor="let tag of trail.tags"><span [innerHTML]="tag.icon_url"></span></div>
     </div>
   </div>
 
