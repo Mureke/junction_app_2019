@@ -29,6 +29,7 @@ export class QuestionsComponent implements OnInit, OnDestroy {
   async getQuestions() {
     this.questions = await this.dataService.fetchDataGet(environment.backendUrl + '/api/question/');
     this.question = this.questions[this.questionIndex];
+    this.sanitizeQuestion();
   }
 
   changeView(view: number) {
@@ -52,9 +53,13 @@ export class QuestionsComponent implements OnInit, OnDestroy {
     } else {
       this.questionIndex++;
       this.question = this.questions[this.questionIndex];
-      this.question.tags.forEach(tag => {
-        tag.icon_url = this.sanitizer.bypassSecurityTrustHtml(tag.icon_url);
-      });
+      this.sanitizeQuestion();
     }
+  }
+
+  sanitizeQuestion() {
+    this.question.tags.forEach(tag => {
+      tag.icon_url = this.sanitizer.bypassSecurityTrustHtml(tag.icon_url);
+    });
   }
 }
