@@ -1,10 +1,10 @@
-<h2>{{question.question}}</h2>
+<h2>{{question['question']}}</h2>
 
-<p *ngIf="question.slider_value_visible">{{currentSelecion}}</p>
+<p *ngIf="question['slider_value_visible']">{{currentSelecion}}</p>
 
 <div class="labels">
-  <p>{{question.min_label}}</p>
-  <p>{{question.max_label}}</p>
+  <p>{{question['min_label']}}</p>
+  <p>{{question['max_label']}}</p>
 </div>
 
 <input
@@ -14,6 +14,6 @@
   id="range"
   step="1"
   min="0"
-  max="{{question.range_length}}"
+  max="{{question['range_length']}}"
   value="0"
   (change)="setSelection(range.value)">

@@ -11,7 +11,7 @@ export class SliderQuestionComponent {
 
   public currentSelecion = 0;
 
-  setSelection(value: number) {
+  setSelection(value: any) {
     this.currentSelecion = value;
   }
 }
