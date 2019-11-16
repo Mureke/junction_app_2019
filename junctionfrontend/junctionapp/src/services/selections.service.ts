@@ -7,9 +7,9 @@ import { BehaviorSubject } from 'rxjs';
 export class SelectionsService {
   private selections: Selections = {
     tags: [],
-    park: null,
-    start_date: null,
-    end_date: null,
+    park: 5,
+    start_date: '2019-11-17',
+    end_date: '2019-11-17',
   };
   private state = new BehaviorSubject(this.selections);
   public state$ = this.state.asObservable();
