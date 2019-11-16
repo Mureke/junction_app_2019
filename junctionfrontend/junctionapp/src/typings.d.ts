@@ -1,6 +1,6 @@
 interface Selections {
-  tags: string[];
   start_date: string;
   end_date: string;
+  tags: number[];
   park: number;
 }
