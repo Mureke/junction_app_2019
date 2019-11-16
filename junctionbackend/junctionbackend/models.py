@@ -33,6 +33,7 @@ class TrailTag(models.Model):
 class Tag(models.Model):
     name = models.CharField(max_length=400, unique=True)
     icon_url = models.CharField(max_length=400, null=True, blank=False)
+    question = models.ForeignKey('Question', on_delete=models.CASCADE, null=True)
 
     class Meta:
         db_table = 'junction_tag'
@@ -48,6 +49,13 @@ class TrailQuestion(models.Model):
 
 class Question(models.Model):
     question = models.CharField(max_length=900, unique=True)
+    slider = models.BooleanField(default=False)  # Frontend stuff :)
+    min_label = models.CharField(max_length=100, null=True, blank=True)
+    max_label = models.CharField(max_length=100, null=True, blank=True)
+    range_length = models.IntegerField(null=True, default=0)
+
+    def __str__(self):
+        return self.question
 
     class Meta:
         db_table = 'junction_question'
