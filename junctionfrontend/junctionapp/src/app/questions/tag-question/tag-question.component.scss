@@ -1,0 +1,28 @@
+@import '../../../assets/styles/variables';
+@import '../../../assets/styles/mixins';
+
+.tags {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+
+  .tag {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+
+    button {
+      @include button;
+      height: 50px;
+      width: 50px;
+      border-radius: 50%;
+      align-items: center;
+    }
+
+    p {
+      font-size: $font-caption;
+    }
+  }
+}

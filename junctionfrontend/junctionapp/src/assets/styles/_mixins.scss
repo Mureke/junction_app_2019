@@ -1,0 +1,27 @@
+@import 'variables';
+
+@mixin text-button {
+  color: #000;
+  background: transparent;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+@mixin button {
+  border: none;
+  box-sizing: border-box;
+  cursor: pointer;
+  padding: 13px 24px;
+  border-radius: 24px;
+  height: 48px;
+  background: $primary-default;
+  color: #fff;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+
+  &:active,
+  &:hover {
+    background: $primary-active;
+  }
+}

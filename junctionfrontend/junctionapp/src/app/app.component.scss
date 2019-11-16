@@ -1,13 +1,13 @@
+@import '../assets/styles/variables';
+
 header {
-  font-family: 'Times New Roman', Times, serif;
-  font-weight: 300;
-  height: 30px;
-  padding: 20px 0;
+  padding: 48px 0 24px;
   width: 100%;
   
   h1 {
     text-align: center;
     margin: 0;
+    letter-spacing: 4.5px;
   }
 
   p {
@@ -18,5 +18,5 @@ header {
 }
 
 .view-container {
-  height: calc(812px - 70px);
+  height: calc(630px - 94px);
 }

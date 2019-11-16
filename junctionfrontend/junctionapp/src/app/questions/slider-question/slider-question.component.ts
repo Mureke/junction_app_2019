@@ -1,5 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { SelectionsService } from 'src/services/selections.service';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-slider-question',
@@ -12,11 +11,7 @@ export class SliderQuestionComponent {
 
   public currentSelecion = 0;
 
-  constructor(private selectionsService: SelectionsService) {
-  }
-
-  setSelection(key: string, value: number) {
-    this.selectionsService.setSelection(key, value);
+  setSelection(value: number) {
     this.currentSelecion = value;
   }
 }

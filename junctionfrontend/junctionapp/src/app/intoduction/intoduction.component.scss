@@ -1,20 +1,35 @@
+@import '../../assets/styles/variables';
+@import '../../assets/styles/mixins';
+
 .introduction-container {
   display: flex;
   flex-direction: column;
   height: 100%;
   position: relative;
+  align-items: center;
+  text-align: center;
 
-  article {
-    position: absolute;
-    display: flex;
-    width: 50%;
-    justify-content: flex-start;
-    top: 25%;
+  .caption {
+    font-size: $font-caption;
+    margin: 0;
+  }
 
-    &:last-of-type {
-      align-self: flex-end;
-      bottom: 25%;
-      top: auto;
+  .bold {
+    font-weight: 700;
+  }
+
+  h2 {
+    margin: 96px 0 24px;
+  }
+
+  button {
+    @include button;
+    width: 335px;
+
+    &.text-button {
+      @include text-button;
+      position: absolute;
+      bottom: 48px;
     }
   }
 }

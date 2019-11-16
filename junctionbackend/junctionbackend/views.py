@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.viewsets import ReadOnlyModelViewSet
+from rest_framework.decorators import api_view
 
 from junctionbackend.models import NationalPark, Tag, Question, Trail
 from junctionbackend.serializers import NationalParkSerializer, TagSerializer, QuestionSerializer, TrailSerializer
@@ -65,3 +66,13 @@ class TrailViewSet(ReadOnlyModelViewSet):
         obj = get_object_or_404(queryset, pk=pk)
         serializer = TrailSerializer(obj)
         return Response(serializer.data)
+
+    @api_view(['GET',])
+    def matching_trails(self, park_id):
+        trails = Trail.objects.all().filter(national_park_id=park_id)
+        tag_ids = self.GET.get('tags', None)
+
+        if tag_ids:
+            trails.filter(trailtag__tag_id__in=tag_ids.split(','))
+
+        return Response(trails.count())

@@ -6,16 +6,26 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class SelectionsService {
   private selections: Selections = {
+    tags: [],
+    park: null,
     start_date: null,
     end_date: null,
-    park: null,
-    trip_length: null,
   };
   private state = new BehaviorSubject(this.selections);
   public state$ = this.state.asObservable();
 
   setSelection(key: string, value: any) {
-    this.selections[key] = value;
+    if (key === 'tags') {
+      const index = this.selections[key].indexOf(value);
+      if (index === -1) {
+        this.selections[key].push(value);
+      } else {
+        this.selections[key].splice(index, 1);
+      }
+    } else {
+      this.selections[key] = value;
+    }
+
     this.state.next(this.selections);
   }
 }

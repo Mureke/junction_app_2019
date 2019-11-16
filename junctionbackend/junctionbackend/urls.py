@@ -11,8 +11,11 @@ api_router.register(r'tag', TagViewSet)
 api_router.register(r'question', QuestionViewSet)
 api_router.register(r'trail', TrailViewSet)
 
-api_urls = []
+api_urls = [
+    url(r'trails/find/(?P<park_id>[\w-]+)/', TrailViewSet.matching_trails),
+
+]
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(api_router.urls, api_urls)),
+    path('api/', include(api_router.urls + api_urls)),
 ]
