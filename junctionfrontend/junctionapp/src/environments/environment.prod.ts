@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  backendUrl: 'http://35.228.92.126'
+  backendUrl: 'https://silenceseekerbackend.mureke.com'
 };
