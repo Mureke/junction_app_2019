@@ -3,6 +3,7 @@
 header {
   padding: 48px 0 24px;
   width: 100%;
+  background: #fff;
   
   h1 {
     text-align: center;
@@ -18,5 +19,28 @@ header {
 }
 
 .view-container {
+  position: relative;
   height: calc(630px - 94px);
+  background: none;
+
+  app-intoduction,
+  app-info,
+  app-time-and-place,
+  app-questions,
+  app-postcards {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    z-index: 2;
+  }
+}
+
+img {
+  height: auto;
+  width: 375px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
 }

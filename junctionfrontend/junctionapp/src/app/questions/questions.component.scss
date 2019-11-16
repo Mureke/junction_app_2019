@@ -1,0 +1,10 @@
+@import '../../assets/styles/mixins';
+
+button {
+  @include button;
+  position: absolute;
+  bottom: 98px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}

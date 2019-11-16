@@ -1,5 +1,6 @@
-from django.db import models
 from django.contrib.gis.db import models
+import datetime
+from django.db.models import Avg
 
 
 class ParkVisits(models.Model):
@@ -17,6 +18,14 @@ class Trail(models.Model):
     name = models.CharField(max_length=300, unique=True)
     location = models.PointField(null=False)
     national_park = models.ForeignKey('NationalPark', on_delete=models.CASCADE)
+    length = models.IntegerField(default=0)
+
+    def get_visits(self, start_date, end_date):
+        date = datetime.datetime.strptime(start_date, '%Y-%m-%d')
+        weekday = date.weekday()
+        visits = ParkVisits.objects.filter(trail_id=self.id).filter(start_time__week_day=weekday).aggregate(Avg('visits'))
+
+        return visits['visits__avg']
 
     class Meta:
         db_table = 'junction_counter'
@@ -54,7 +63,6 @@ class Question(models.Model):
     max_label = models.CharField(max_length=100, null=True, blank=True)
     range_length = models.IntegerField(null=True, default=0)
     slider_value_visible = models.BooleanField(default=False)
-
 
     def __str__(self):
         return self.question

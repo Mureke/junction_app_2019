@@ -19,6 +19,11 @@
       width: 50px;
       border-radius: 50%;
       align-items: center;
+      background: $deactive;
+
+      &.selected {
+        background: $primary-active;
+      }
     }
 
     p {
