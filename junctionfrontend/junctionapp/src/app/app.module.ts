@@ -8,6 +8,7 @@ import { TimeAndPlaceComponent } from './time-and-place/time-and-place.component
 import { QuestionsComponent } from './questions/questions.component';
 import { PostcardsComponent } from './postcards/postcards.component';
 import { SliderQuestionComponent } from './questions/slider-question/slider-question.component';
+import { TagQuestionComponent } from './questions/tag-question/tag-question.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { SliderQuestionComponent } from './questions/slider-question/slider-ques
     TimeAndPlaceComponent,
     QuestionsComponent,
     PostcardsComponent,
-    SliderQuestionComponent
+    SliderQuestionComponent,
+    TagQuestionComponent
   ],
   imports: [
     BrowserModule

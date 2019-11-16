@@ -1,0 +1,8 @@
+<h2>{{question.question}}</h2>
+
+<div class="tags">
+  <div class="tag" (click)="setSelection(tag.id)" *ngFor="let tag of question.tags">
+    <button></button>
+    <p class="caption">{{tag.name}}</p>
+  </div>
+</div>
