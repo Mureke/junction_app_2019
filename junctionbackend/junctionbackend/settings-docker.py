@@ -1,5 +1,7 @@
 from .settings import *
 
+STATIC_URL = '/static/'
+STATIC_ROOT = '/static/'
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
