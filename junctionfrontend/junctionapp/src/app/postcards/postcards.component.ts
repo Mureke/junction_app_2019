@@ -26,9 +26,10 @@ export class PostcardsComponent implements OnInit {
   }
 
   async getTrails(selections) {
-    let url = environment.backendUrl + '/api/trails/find/';
+    const url = environment.backendUrl + '/api/trails/find/' + selections.park + '/?tags=' + selections.tags.join(',') + '&start_date=' + selections.start_date;
+    console.log(url);
 
-    this.trails = await this.dataService.fetchDataGet('http://127.0.0.1:8000/api/trails/find/5/?tags=1,3,4,5,6,7,6,7,8,11,12,12,13,41&start_date=2019-02-01');
+    this.trails = await this.dataService.fetchDataGet(url);
   }
 
   changeView(view: number) {
