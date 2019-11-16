@@ -18,7 +18,6 @@ export class TagQuestionComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.selectionSubscription = this.selectionService.state$.subscribe((selections: Selections) => {
-      console.log(selections);
       this.selectedTags = selections.tags;
     });
   }

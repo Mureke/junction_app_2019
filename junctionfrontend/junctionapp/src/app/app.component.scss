@@ -1,6 +1,7 @@
 @import '../assets/styles/variables';
 
 header {
+  position: relative;
   padding: 48px 0 24px;
   width: 100%;
   background: #fff;
@@ -15,6 +16,14 @@ header {
     position: absolute;
     top: 0;
     margin: 10px;
+
+    &.skip {
+      right: 10px;
+    }
+
+    &.caption {
+      font-size: $font-caption;
+    }
   }
 }
 

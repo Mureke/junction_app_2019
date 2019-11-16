@@ -206,6 +206,15 @@ export class QuestionsComponent {
     this.viewEmitter.emit(view);
   }
 
+  previous() {
+    if (this.questionIndex === 0) {
+      this.changeView(2);
+    } else {
+      this.questionIndex--;
+      this.question = this.questions[this.questionIndex];
+    }
+  }
+
   next() {
     if (this.questionIndex === 6) {
       this.changeView(4);

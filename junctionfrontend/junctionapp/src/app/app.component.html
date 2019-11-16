@@ -1,6 +1,7 @@
 <header>
-  <p (click)="handleViewChange(currentView - 1)" *ngIf="currentView !== 0">Back!</p>
+  <p class="caption" (click)="handleViewChange(currentView - 1)" *ngIf="currentView !== 0 && currentView !== 3">previous</p>
   <h1>Silence Seeker</h1>
+  <p class="caption skip" (click)="handleViewChange(currentView + 1)" *ngIf="currentView !== 0 && currentView !== 3">skip</p>
 </header>
 
 <div class="view-container" [ngSwitch]="currentView">

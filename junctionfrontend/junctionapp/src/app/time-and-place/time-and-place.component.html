@@ -1,17 +1,40 @@
-<input #start_date type="date" name="start_date" id="start_date" (change)="setSelection('start_date', start_date.value)">
-<input #end_date type="date" name="end_date" id="end_date" (change)="setSelection('end_date', end_date.value)">
+<h2>I'm planning on taking my trip <br>between these dates...</h2>
+
+<div class="dates">
+  <input #start_date type="date" value="2019-11-17" name="start_date" id="start_date" (change)="setSelection('start_date', start_date.value)">
+  <input #end_date type="date" value="2019-11-17" name="end_date" id="end_date" (change)="setSelection('end_date', end_date.value)">
+</div>
+
+<h2>or</h2>
+
+<h2>...I only know the time of the year</h2>
 
 <div class="season-container">
-  <button id="spring" [class]="{'selected': spring}">Spring</button>
-  <button id="summer" [class]="{'selected': summer}">Summer</button>
-  <button id="autumn" [class]="{'selected': autumn}">Autumn</button>
-  <button id="winter" [class]="{'selected': winter}">Winter</button>
+  <div class="season" (click)="spring = !spring">
+    <button [ngClass]="{'selected': spring}">1</button>
+    <p class="caption">Spring</p>
+  </div>
+  <div class="season" (click)="summer = !summer">
+    <button [ngClass]="{'selected': summer}">2</button>
+    <p class="caption">Summer</p>
+  </div>
+  <div class="season" (click)="autumn = !autumn">
+    <button [ngClass]="{'selected': autumn}">3</button>
+    <p class="caption">Autumn</p>
+  </div>
+  <div class="season" (click)="winter = !winter">
+    <button [ngClass]="{'selected': winter}">4</button>
+    <p class="caption">Winter</p>
+  </div>
 </div>
 
 <div class="national-parks">
-  <button (click)="setSelection('park', 34361)">Pallas / Ylläs</button>
+  <div class="park" (click)="setSelection('park', park.id)" *ngFor="let park of parks">
+    <button [ngClass]="{'selected': selections.park === park.id}">{{park.id}}</button>
+    <p class="caption">{{park.name}}</p>
+  </div>
+  <button >Pallas / Ylläs</button>
   <button (click)="setSelection('park', 852)">Nuuksio</button>
-  <button (click)="setSelection('park', 0)">Don't know yet</button>
 </div>
 
-<button (click)="changeView(3)">That's all folks!</button>
+<button class="continue" [ngClass]="{deactive: !spring && !summer && !autumn && !winter}" (click)="changeView(3)">Continue</button>

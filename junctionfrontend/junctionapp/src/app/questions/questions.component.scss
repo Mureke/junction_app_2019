@@ -8,3 +8,14 @@ button {
   right: 0;
   margin: 0 auto;
 }
+
+.caption {
+  font-size: $font-caption;
+  position: absolute;
+  top: -94px;
+  margin: 10px;
+
+  &.skip {
+    right: 10px;
+  }
+}

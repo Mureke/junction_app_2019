@@ -1,0 +1,85 @@
+@import '../../assets/styles/mixins';
+
+h2 {
+  text-align: center;
+  color: #717673;
+  font-weight: 700;
+}
+
+h2:first-child {
+  margin: 48px 0 24px;
+}
+
+h2:first-child, h2:nth-child(4) {
+  color: #393838;
+}
+
+.dates {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+  input {
+    @include button;
+    background: transparent;
+    border: 1px solid #717673;
+    box-shadow: 2px 2px 2px #717673;
+    color: #717673;
+
+    &:hover,
+    &:active {
+      background: transparent;
+    }
+  }
+}
+
+.season-container {
+  display: flex;
+  flex-direction: row;
+
+  .button {
+    @include button;
+  }
+}
+
+.season-container, .national-parks {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+
+  .season, .park {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+
+    button {
+      @include button;
+      height: 50px;
+      width: 50px;
+      border-radius: 50%;
+      align-items: center;
+      background: $deactive;
+
+      &.selected {
+        background: $primary-active;
+      }
+    }
+
+    p {
+      font-size: $font-caption;
+      color: #717673;
+    }
+  }
+}
+
+.continue {
+  @include button;
+  width: 335px;
+  margin: 24px auto 0;
+
+  &.deactive {
+    background: $deactive;
+  }
+}
