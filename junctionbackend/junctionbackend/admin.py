@@ -26,6 +26,7 @@ class TrailQuestionInline(admin.TabularInline):
     model = TrailQuestion
     extra = 0
 
+
 class TrailAdmin(admin.ModelAdmin):
     inlines = [TrailQuestionInline, TrailTagInline]
     list_display = ('name',)
