@@ -41,7 +41,7 @@ class TrailTag(models.Model):
 
 class Tag(models.Model):
     name = models.CharField(max_length=400, unique=True)
-    icon_url = models.CharField(max_length=400, null=True, blank=False)
+    icon_url = models.CharField(max_length=20000, null=True, blank=False)
     question = models.ForeignKey('Question', on_delete=models.CASCADE, null=True)
 
     class Meta:
