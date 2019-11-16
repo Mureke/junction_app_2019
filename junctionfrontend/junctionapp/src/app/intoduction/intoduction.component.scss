@@ -1,20 +1,27 @@
+@import '../../assets/styles/variables';
+@import '../../assets/styles/mixins';
+
 .introduction-container {
   display: flex;
   flex-direction: column;
   height: 100%;
   position: relative;
+  align-items: center;
 
-  article {
-    position: absolute;
+  .caption {
+    font-size: $font-caption;
+    margin: 0;
+  }
+
+  button {
+    @include button;
     display: flex;
-    width: 50%;
-    justify-content: flex-start;
-    top: 25%;
+    align-items: center;
 
-    &:last-of-type {
-      align-self: flex-end;
-      bottom: 25%;
-      top: auto;
+    &.text-button {
+      color: #000;
+      background: transparent;
+      border: none;
     }
   }
 }
