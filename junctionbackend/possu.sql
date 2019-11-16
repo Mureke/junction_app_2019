@@ -43,9 +43,6 @@ CREATE TABLE public.auth_group (
     name character varying(150) NOT NULL
 );
 
-CREATE USER junction_man;
-ALTER USER junction_man WITH password 'pass';
-
 
 ALTER TABLE public.auth_group OWNER TO junction_man;
 
@@ -490,6 +487,150 @@ ALTER SEQUENCE public.junction_park_visitors_id_seq OWNED BY public.junction_par
 
 
 --
+-- Name: junction_question; Type: TABLE; Schema: public; Owner: junction_man
+--
+
+CREATE TABLE public.junction_question (
+    id integer NOT NULL,
+    question character varying(900) NOT NULL,
+    slider boolean NOT NULL,
+    max_label character varying(100),
+    min_label character varying(100),
+    range_length integer
+);
+
+
+ALTER TABLE public.junction_question OWNER TO junction_man;
+
+--
+-- Name: junction_question_id_seq; Type: SEQUENCE; Schema: public; Owner: junction_man
+--
+
+CREATE SEQUENCE public.junction_question_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.junction_question_id_seq OWNER TO junction_man;
+
+--
+-- Name: junction_question_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: junction_man
+--
+
+ALTER SEQUENCE public.junction_question_id_seq OWNED BY public.junction_question.id;
+
+
+--
+-- Name: junction_tag; Type: TABLE; Schema: public; Owner: junction_man
+--
+
+CREATE TABLE public.junction_tag (
+    id integer NOT NULL,
+    name character varying(400) NOT NULL,
+    icon_url character varying(400),
+    question_id integer
+);
+
+
+ALTER TABLE public.junction_tag OWNER TO junction_man;
+
+--
+-- Name: junction_tag_id_seq; Type: SEQUENCE; Schema: public; Owner: junction_man
+--
+
+CREATE SEQUENCE public.junction_tag_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.junction_tag_id_seq OWNER TO junction_man;
+
+--
+-- Name: junction_tag_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: junction_man
+--
+
+ALTER SEQUENCE public.junction_tag_id_seq OWNED BY public.junction_tag.id;
+
+
+--
+-- Name: junction_trail_question; Type: TABLE; Schema: public; Owner: junction_man
+--
+
+CREATE TABLE public.junction_trail_question (
+    id integer NOT NULL,
+    tag_id integer NOT NULL,
+    trail_id integer NOT NULL
+);
+
+
+ALTER TABLE public.junction_trail_question OWNER TO junction_man;
+
+--
+-- Name: junction_trail_question_id_seq; Type: SEQUENCE; Schema: public; Owner: junction_man
+--
+
+CREATE SEQUENCE public.junction_trail_question_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.junction_trail_question_id_seq OWNER TO junction_man;
+
+--
+-- Name: junction_trail_question_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: junction_man
+--
+
+ALTER SEQUENCE public.junction_trail_question_id_seq OWNED BY public.junction_trail_question.id;
+
+
+--
+-- Name: junction_trail_tag; Type: TABLE; Schema: public; Owner: junction_man
+--
+
+CREATE TABLE public.junction_trail_tag (
+    id integer NOT NULL,
+    tag_id integer NOT NULL,
+    trail_id integer NOT NULL
+);
+
+
+ALTER TABLE public.junction_trail_tag OWNER TO junction_man;
+
+--
+-- Name: junction_trail_tag_id_seq; Type: SEQUENCE; Schema: public; Owner: junction_man
+--
+
+CREATE SEQUENCE public.junction_trail_tag_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.junction_trail_tag_id_seq OWNER TO junction_man;
+
+--
+-- Name: junction_trail_tag_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: junction_man
+--
+
+ALTER SEQUENCE public.junction_trail_tag_id_seq OWNED BY public.junction_trail_tag.id;
+
+
+--
 -- Name: auth_group id; Type: DEFAULT; Schema: public; Owner: junction_man
 --
 
@@ -574,6 +715,34 @@ ALTER TABLE ONLY public.junction_park_visitors ALTER COLUMN id SET DEFAULT nextv
 
 
 --
+-- Name: junction_question id; Type: DEFAULT; Schema: public; Owner: junction_man
+--
+
+ALTER TABLE ONLY public.junction_question ALTER COLUMN id SET DEFAULT nextval('public.junction_question_id_seq'::regclass);
+
+
+--
+-- Name: junction_tag id; Type: DEFAULT; Schema: public; Owner: junction_man
+--
+
+ALTER TABLE ONLY public.junction_tag ALTER COLUMN id SET DEFAULT nextval('public.junction_tag_id_seq'::regclass);
+
+
+--
+-- Name: junction_trail_question id; Type: DEFAULT; Schema: public; Owner: junction_man
+--
+
+ALTER TABLE ONLY public.junction_trail_question ALTER COLUMN id SET DEFAULT nextval('public.junction_trail_question_id_seq'::regclass);
+
+
+--
+-- Name: junction_trail_tag id; Type: DEFAULT; Schema: public; Owner: junction_man
+--
+
+ALTER TABLE ONLY public.junction_trail_tag ALTER COLUMN id SET DEFAULT nextval('public.junction_trail_tag_id_seq'::regclass);
+
+
+--
 -- Data for Name: auth_group; Type: TABLE DATA; Schema: public; Owner: junction_man
 --
 
@@ -634,6 +803,22 @@ COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
 38	Can change trail	8	change_trail
 39	Can delete trail	8	delete_trail
 40	Can view trail	8	view_trail
+41	Can add tag	10	add_tag
+42	Can change tag	10	change_tag
+43	Can delete tag	10	delete_tag
+44	Can view tag	10	view_tag
+45	Can add trail tag	11	add_trailtag
+46	Can change trail tag	11	change_trailtag
+47	Can delete trail tag	11	delete_trailtag
+48	Can view trail tag	11	view_trailtag
+49	Can add trail question	12	add_trailquestion
+50	Can change trail question	12	change_trailquestion
+51	Can delete trail question	12	delete_trailquestion
+52	Can view trail question	12	view_trailquestion
+53	Can add question	13	add_question
+54	Can change question	13	change_question
+55	Can delete question	13	delete_question
+56	Can view question	13	view_question
 \.
 
 
@@ -642,6 +827,7 @@ COPY public.auth_permission (id, name, content_type_id, codename) FROM stdin;
 --
 
 COPY public.auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
+1	pbkdf2_sha256$150000$UTijKNTOe0it$BTGWIWPgg2mK3wUWZBxNjw0zR3h4A7ME1wTObGvwg2o=	2019-11-16 10:25:28.066108+00	t	mureke				t	t	2019-11-16 10:25:06.466269+00
 \.
 
 
@@ -666,6 +852,48 @@ COPY public.auth_user_user_permissions (id, user_id, permission_id) FROM stdin;
 --
 
 COPY public.django_admin_log (id, action_time, object_id, object_repr, action_flag, change_message, content_type_id, user_id) FROM stdin;
+1	2019-11-16 10:30:52.559873+00	1	Tag object (1)	1	[{"added": {}}]	10	1
+2	2019-11-16 10:30:55.04329+00	1	Tag object (1)	2	[]	10	1
+3	2019-11-16 10:31:02.130495+00	2	Tag object (2)	1	[{"added": {}}]	10	1
+4	2019-11-16 10:31:06.295584+00	3	Tag object (3)	1	[{"added": {}}]	10	1
+5	2019-11-16 10:31:16.85905+00	4	Tag object (4)	1	[{"added": {}}]	10	1
+6	2019-11-16 13:25:00.394576+00	1	Question object (1)	1	[{"added": {}}]	13	1
+7	2019-11-16 13:37:34.685534+00	2	Question object (2)	1	[{"added": {}}]	13	1
+8	2019-11-16 14:03:34.077161+00	5	Tag object (5)	1	[{"added": {}}]	10	1
+9	2019-11-16 14:03:37.683035+00	5	Tag object (5)	2	[]	10	1
+10	2019-11-16 14:03:49.741955+00	6	Tag object (6)	1	[{"added": {}}]	10	1
+11	2019-11-16 14:04:07.923284+00	7	Tag object (7)	1	[{"added": {}}]	10	1
+12	2019-11-16 14:18:11.414979+00	3	Question object (3)	1	[{"added": {}}]	13	1
+13	2019-11-16 14:27:05.557731+00	2	My skill level is:	2	[{"changed": {"fields": ["question"]}}]	13	1
+14	2019-11-16 14:27:08.56178+00	2	My skill level is:	2	[]	13	1
+15	2019-11-16 14:27:29.527999+00	4	Which activitis interest you?	1	[{"added": {}}]	13	1
+16	2019-11-16 14:27:30.974803+00	4	Which activitis interest you?	2	[]	13	1
+17	2019-11-16 14:27:52.577936+00	5	My goal is to..	1	[{"added": {}}]	13	1
+18	2019-11-16 14:28:05.866018+00	6	Which do you prefer?	1	[{"added": {}}]	13	1
+19	2019-11-16 14:28:15.776392+00	7	My travelling posse is...	1	[{"added": {}}]	13	1
+20	2019-11-16 14:28:27.867793+00	8	Please notice my special needs for	1	[{"added": {}}]	13	1
+21	2019-11-16 14:28:43.622904+00	9	I'm travelling with	1	[{"added": {}}]	13	1
+22	2019-11-16 14:29:12.99592+00	4	Which activities interest you?	2	[{"changed": {"fields": ["question"]}}]	13	1
+23	2019-11-16 14:29:14.969715+00	1	Tag object (1)	2	[{"changed": {"fields": ["question"]}}]	10	1
+24	2019-11-16 14:29:36.368458+00	1	Tag object (1)	2	[]	10	1
+25	2019-11-16 14:29:46.670041+00	2	Tag object (2)	2	[{"changed": {"fields": ["question"]}}]	10	1
+26	2019-11-16 14:29:55.25866+00	4	Tag object (4)	2	[{"changed": {"fields": ["question"]}}]	10	1
+27	2019-11-16 14:30:57.630419+00	8	Tag object (8)	1	[{"added": {}}]	10	1
+28	2019-11-16 14:31:14.407068+00	5	Tag object (5)	2	[{"changed": {"fields": ["name", "question"]}}]	10	1
+29	2019-11-16 14:31:28.613572+00	6	Tag object (6)	2	[{"changed": {"fields": ["question"]}}]	10	1
+30	2019-11-16 14:31:43.269262+00	7	Tag object (7)	2	[{"changed": {"fields": ["question"]}}]	10	1
+31	2019-11-16 14:31:48.915239+00	7	Tag object (7)	2	[]	10	1
+32	2019-11-16 14:32:06.293896+00	9	Tag object (9)	1	[{"added": {}}]	10	1
+33	2019-11-16 14:32:12.580561+00	10	Tag object (10)	1	[{"added": {}}]	10	1
+34	2019-11-16 14:32:31.036754+00	11	Tag object (11)	1	[{"added": {}}]	10	1
+35	2019-11-16 14:32:43.829209+00	12	Tag object (12)	1	[{"added": {}}]	10	1
+36	2019-11-16 14:32:50.474845+00	13	Tag object (13)	1	[{"added": {}}]	10	1
+37	2019-11-16 14:33:02.253535+00	14	Tag object (14)	1	[{"added": {}}]	10	1
+38	2019-11-16 14:33:20.916305+00	15	Tag object (15)	1	[{"added": {}}]	10	1
+39	2019-11-16 14:33:32.379893+00	16	Tag object (16)	1	[{"added": {}}]	10	1
+40	2019-11-16 14:33:42.213079+00	17	Tag object (17)	1	[{"added": {}}]	10	1
+41	2019-11-16 14:33:59.140416+00	18	Tag object (18)	1	[{"added": {}}]	10	1
+42	2019-11-16 14:34:11.50028+00	19	Tag object (19)	1	[{"added": {}}]	10	1
 \.
 
 
@@ -683,6 +911,10 @@ COPY public.django_content_type (id, app_label, model) FROM stdin;
 7	junctionbackend	parkvisits
 9	junctionbackend	nationalpark
 8	junctionbackend	trail
+10	junctionbackend	tag
+11	junctionbackend	trailtag
+12	junctionbackend	trailquestion
+13	junctionbackend	question
 \.
 
 
@@ -711,6 +943,13 @@ COPY public.django_migrations (id, app, name, applied) FROM stdin;
 18	junctionbackend	0001_initial	2019-11-15 19:10:05.027247+00
 19	junctionbackend	0002_auto_20191115_2020	2019-11-15 20:20:57.010398+00
 20	junctionbackend	0003_auto_20191115_2045	2019-11-15 20:45:57.60317+00
+21	junctionbackend	0004_tag_trailtag	2019-11-16 10:24:15.627835+00
+22	junctionbackend	0005_question_trailquestion	2019-11-16 11:05:07.74986+00
+23	junctionbackend	0006_question_slider	2019-11-16 13:24:48.658773+00
+24	junctionbackend	0007_auto_20191116_1333	2019-11-16 13:33:09.217746+00
+25	junctionbackend	0008_auto_20191116_1334	2019-11-16 13:34:45.852672+00
+26	junctionbackend	0009_auto_20191116_1336	2019-11-16 13:36:13.873132+00
+27	junctionbackend	0010_tag_question	2019-11-16 14:23:25.63968+00
 \.
 
 
@@ -719,6 +958,7 @@ COPY public.django_migrations (id, app, name, applied) FROM stdin;
 --
 
 COPY public.django_session (session_key, session_data, expire_date) FROM stdin;
+o61ihxdhrd1rng01fnipyirs30vkv3dv	OTcyZGI5Y2Y2YzNlYmI1MzkyZDAwZTM5MTk1MDY2NGMwNWFlMGNkOTp7Il9hdXRoX3VzZXJfaWQiOiIxIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIwY2Y5Yjk0N2U1MjcxODVjZDQxNzgwNzMzMzBlYjY0NjhjZTcxMmMxIn0=	2019-11-30 10:25:28.069194+00
 \.
 
 
@@ -7223,6 +7463,406 @@ COPY public.junction_park_visitors (id, start_time, end_time, visits, trail_id) 
 
 
 --
+-- Data for Name: junction_question; Type: TABLE DATA; Schema: public; Owner: junction_man
+--
+
+COPY public.junction_question (id, question, slider, max_label, min_label, range_length) FROM stdin;
+3	How long of a trip are you planning?	t	14 Nights	0 Nights	14
+2	My skill level is:	t	Swiss knife	All Thumbs	4
+5	My goal is to..	f	Excersise	Chill	2
+6	Which do you prefer?	f	\N	\N	0
+7	My travelling posse is...	f	\N	\N	0
+8	Please notice my special needs for	f	\N	\N	0
+9	I'm travelling with	f	\N	\N	0
+4	Which activities interest you?	f	\N	\N	0
+\.
+
+
+--
+-- Data for Name: junction_tag; Type: TABLE DATA; Schema: public; Owner: junction_man
+--
+
+COPY public.junction_tag (id, name, icon_url, question_id) FROM stdin;
+3	Day trip		\N
+1	Hiking		4
+2	Mountain Biking		4
+4	Fishing		4
+8	Bird watching		4
+5	Cross-Country skiing		4
+6	Mushroom picking		4
+7	Orienteering		4
+9	Decidous forest		6
+10	Pine forest		6
+11	Spurce forest		6
+12	Single or a pair		7
+13	Group		7
+14	Large group		7
+15	With children		7
+16	Accessibility		8
+17	Medical care		8
+18	Own car		9
+19	Public transport		9
+\.
+
+
+--
+-- Data for Name: junction_trail_question; Type: TABLE DATA; Schema: public; Owner: junction_man
+--
+
+COPY public.junction_trail_question (id, tag_id, trail_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: junction_trail_tag; Type: TABLE DATA; Schema: public; Owner: junction_man
+--
+
+COPY public.junction_trail_tag (id, tag_id, trail_id) FROM stdin;
+1	7	1
+2	2	1
+3	1	1
+4	3	4374
+5	6	4374
+6	5	4374
+7	1	4374
+8	7	4374
+9	7	4375
+10	1	4375
+11	2	4375
+12	3	4375
+13	5	4375
+14	6	4375
+15	2	4376
+16	6	4376
+17	6	4377
+18	3	4377
+19	7	4377
+20	5	4377
+21	4	4377
+22	1	4378
+23	5	4378
+24	4	4379
+25	2	4379
+26	6	4379
+27	7	4379
+28	5	4379
+29	1	4379
+30	2	4380
+31	6	4381
+32	4	4381
+33	2	4381
+34	7	4381
+35	3	4381
+36	1	4381
+37	7	4382
+38	4	4382
+39	1	4382
+40	2	4382
+41	7	4383
+42	5	4383
+43	6	4383
+44	1	4383
+45	7	4384
+46	6	4384
+47	2	4384
+48	5	4384
+49	3	4384
+50	1	4385
+51	2	4386
+52	7	4386
+53	2	4387
+54	5	4388
+55	7	4388
+56	6	4389
+57	7	4389
+58	1	4389
+59	2	4389
+60	5	4389
+61	3	4389
+62	1	4390
+63	3	4390
+64	6	4390
+65	5	4390
+66	4	4390
+67	5	4391
+68	6	4392
+69	1	4393
+70	5	4394
+71	1	4394
+72	5	4395
+73	4	4395
+74	5	4396
+75	1	4396
+76	6	4396
+77	4	4396
+78	4	4397
+79	5	4398
+80	3	4398
+81	4	4398
+82	6	4398
+83	1	4398
+84	2	4398
+85	5	4399
+86	7	4399
+87	6	4399
+88	4	4399
+89	1	4399
+90	4	4400
+91	5	4400
+92	1	4400
+93	2	4400
+94	4	4401
+95	2	4401
+96	5	4401
+97	7	4401
+98	6	4401
+99	3	4402
+100	7	4402
+101	2	4402
+102	2	4403
+103	4	4403
+104	3	4403
+105	7	4403
+106	7	4404
+107	1	4404
+108	3	4404
+109	5	4404
+110	4	4404
+111	6	4404
+112	7	4405
+113	1	4405
+114	1	4406
+115	1	4407
+116	3	4407
+117	6	4407
+118	4	4408
+119	1	4408
+120	5	4408
+121	6	4408
+122	3	4408
+123	5	4409
+124	7	4409
+125	1	4409
+126	6	4409
+127	4	4409
+128	3	4409
+129	3	4410
+130	4	4410
+131	5	4410
+132	1	4410
+133	5	4411
+134	7	4412
+135	6	4412
+136	4	4413
+137	2	4413
+138	5	4413
+139	3	4413
+140	1	4414
+141	6	4414
+142	7	4414
+143	2	4415
+144	3	4415
+145	1	4415
+146	5	4415
+147	6	4415
+148	4	4415
+149	7	4416
+150	4	4416
+151	6	4416
+152	5	4416
+153	3	4417
+154	1	4417
+155	5	4417
+156	7	4417
+157	6	4417
+158	4	4417
+159	2	4418
+160	4	4418
+161	1	4418
+162	5	4418
+163	5	4419
+164	1	4419
+165	7	4419
+166	3	4419
+167	2	4419
+168	4	4419
+169	1	1
+170	3	1
+171	5	1
+172	2	1
+173	6	1
+174	7	4374
+175	3	4374
+176	1	4374
+177	6	4375
+178	5	4375
+179	3	4376
+180	5	4376
+181	4	4376
+182	1	4377
+183	2	4377
+184	5	4377
+185	3	4377
+186	4	4377
+187	7	4377
+188	7	4378
+189	4	4378
+190	3	4378
+191	5	4378
+192	6	4378
+193	2	4378
+194	2	4379
+195	5	4379
+196	7	4379
+197	1	4379
+198	3	4379
+199	6	4379
+200	4	4380
+201	3	4380
+202	6	4380
+203	1	4380
+204	5	4380
+205	7	4381
+206	3	4381
+207	5	4381
+208	6	4382
+209	5	4382
+210	1	4382
+211	2	4382
+212	3	4382
+213	1	4383
+214	5	4383
+215	1	4384
+216	5	4384
+217	7	4384
+218	2	4385
+219	5	4386
+220	3	4386
+221	1	4386
+222	2	4386
+223	4	4386
+224	3	4387
+225	1	4388
+226	7	4389
+227	3	4389
+228	4	4389
+229	2	4389
+230	2	4390
+231	1	4390
+232	6	4390
+233	3	4390
+234	7	4390
+235	2	4391
+236	5	4391
+237	6	4391
+238	1	4392
+239	2	4392
+240	6	4392
+241	7	4393
+242	2	4393
+243	7	4394
+244	2	4394
+245	6	4394
+246	5	4394
+247	2	4395
+248	6	4395
+249	3	4395
+250	7	4395
+251	5	4395
+252	2	4396
+253	4	4396
+254	2	4397
+255	5	4397
+256	4	4397
+257	1	4398
+258	2	4398
+259	4	4398
+260	7	4398
+261	6	4398
+262	1	4399
+263	3	4399
+264	6	4399
+265	4	4399
+266	2	4399
+267	7	4399
+268	7	4400
+269	4	4400
+270	2	4400
+271	5	4400
+272	6	4400
+273	1	4400
+274	2	4401
+275	1	4401
+276	5	4401
+277	6	4401
+278	7	4402
+279	2	4402
+280	5	4402
+281	3	4402
+282	6	4402
+283	1	4402
+284	1	4403
+285	5	4403
+286	2	4403
+287	6	4403
+288	7	4403
+289	5	4404
+290	7	4404
+291	2	4404
+292	5	4405
+293	2	4405
+294	6	4405
+295	3	4406
+296	3	4407
+297	1	4407
+298	2	4407
+299	1	4408
+300	7	4408
+301	6	4408
+302	2	4408
+303	6	4409
+304	5	4409
+305	7	4409
+306	1	4409
+307	4	4410
+308	1	4410
+309	5	4410
+310	6	4411
+311	7	4411
+312	3	4411
+313	2	4411
+314	5	4411
+315	1	4411
+316	5	4412
+317	3	4412
+318	6	4412
+319	7	4412
+320	2	4412
+321	7	4413
+322	5	4413
+323	2	4413
+324	4	4413
+325	2	4414
+326	6	4414
+327	7	4414
+328	1	4414
+329	5	4415
+330	2	4415
+331	7	4415
+332	3	4415
+333	6	4416
+334	5	4417
+335	4	4417
+336	1	4417
+337	5	4418
+338	6	4418
+339	3	4418
+340	4	4418
+341	3	4419
+\.
+
+
+--
 -- Data for Name: spatial_ref_sys; Type: TABLE DATA; Schema: public; Owner: junction_man
 --
 
@@ -7248,7 +7888,7 @@ SELECT pg_catalog.setval('public.auth_group_permissions_id_seq', 1, false);
 -- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: junction_man
 --
 
-SELECT pg_catalog.setval('public.auth_permission_id_seq', 40, true);
+SELECT pg_catalog.setval('public.auth_permission_id_seq', 56, true);
 
 
 --
@@ -7262,7 +7902,7 @@ SELECT pg_catalog.setval('public.auth_user_groups_id_seq', 1, false);
 -- Name: auth_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: junction_man
 --
 
-SELECT pg_catalog.setval('public.auth_user_id_seq', 1, false);
+SELECT pg_catalog.setval('public.auth_user_id_seq', 1, true);
 
 
 --
@@ -7276,21 +7916,21 @@ SELECT pg_catalog.setval('public.auth_user_user_permissions_id_seq', 1, false);
 -- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: junction_man
 --
 
-SELECT pg_catalog.setval('public.django_admin_log_id_seq', 1, false);
+SELECT pg_catalog.setval('public.django_admin_log_id_seq', 42, true);
 
 
 --
 -- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: junction_man
 --
 
-SELECT pg_catalog.setval('public.django_content_type_id_seq', 9, true);
+SELECT pg_catalog.setval('public.django_content_type_id_seq', 13, true);
 
 
 --
 -- Name: django_migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: junction_man
 --
 
-SELECT pg_catalog.setval('public.django_migrations_id_seq', 20, true);
+SELECT pg_catalog.setval('public.django_migrations_id_seq', 27, true);
 
 
 --
@@ -7312,6 +7952,34 @@ SELECT pg_catalog.setval('public.junction_national_park_id_seq', 5, true);
 --
 
 SELECT pg_catalog.setval('public.junction_park_visitors_id_seq', 6557, true);
+
+
+--
+-- Name: junction_question_id_seq; Type: SEQUENCE SET; Schema: public; Owner: junction_man
+--
+
+SELECT pg_catalog.setval('public.junction_question_id_seq', 9, true);
+
+
+--
+-- Name: junction_tag_id_seq; Type: SEQUENCE SET; Schema: public; Owner: junction_man
+--
+
+SELECT pg_catalog.setval('public.junction_tag_id_seq', 19, true);
+
+
+--
+-- Name: junction_trail_question_id_seq; Type: SEQUENCE SET; Schema: public; Owner: junction_man
+--
+
+SELECT pg_catalog.setval('public.junction_trail_question_id_seq', 1, false);
+
+
+--
+-- Name: junction_trail_tag_id_seq; Type: SEQUENCE SET; Schema: public; Owner: junction_man
+--
+
+SELECT pg_catalog.setval('public.junction_trail_tag_id_seq', 341, true);
 
 
 --
@@ -7483,6 +8151,54 @@ ALTER TABLE ONLY public.junction_park_visitors
 
 
 --
+-- Name: junction_question junction_question_pkey; Type: CONSTRAINT; Schema: public; Owner: junction_man
+--
+
+ALTER TABLE ONLY public.junction_question
+    ADD CONSTRAINT junction_question_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: junction_question junction_question_question_key; Type: CONSTRAINT; Schema: public; Owner: junction_man
+--
+
+ALTER TABLE ONLY public.junction_question
+    ADD CONSTRAINT junction_question_question_key UNIQUE (question);
+
+
+--
+-- Name: junction_tag junction_tag_name_key; Type: CONSTRAINT; Schema: public; Owner: junction_man
+--
+
+ALTER TABLE ONLY public.junction_tag
+    ADD CONSTRAINT junction_tag_name_key UNIQUE (name);
+
+
+--
+-- Name: junction_tag junction_tag_pkey; Type: CONSTRAINT; Schema: public; Owner: junction_man
+--
+
+ALTER TABLE ONLY public.junction_tag
+    ADD CONSTRAINT junction_tag_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: junction_trail_question junction_trail_question_pkey; Type: CONSTRAINT; Schema: public; Owner: junction_man
+--
+
+ALTER TABLE ONLY public.junction_trail_question
+    ADD CONSTRAINT junction_trail_question_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: junction_trail_tag junction_trail_tag_pkey; Type: CONSTRAINT; Schema: public; Owner: junction_man
+--
+
+ALTER TABLE ONLY public.junction_trail_tag
+    ADD CONSTRAINT junction_trail_tag_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: auth_group_name_a6ea08ec_like; Type: INDEX; Schema: public; Owner: junction_man
 --
 
@@ -7602,6 +8318,55 @@ CREATE INDEX junction_park_visitors_counter_id_7ef6ce2b ON public.junction_park_
 
 
 --
+-- Name: junction_question_question_136b422a_like; Type: INDEX; Schema: public; Owner: junction_man
+--
+
+CREATE INDEX junction_question_question_136b422a_like ON public.junction_question USING btree (question varchar_pattern_ops);
+
+
+--
+-- Name: junction_tag_name_030ae2a2_like; Type: INDEX; Schema: public; Owner: junction_man
+--
+
+CREATE INDEX junction_tag_name_030ae2a2_like ON public.junction_tag USING btree (name varchar_pattern_ops);
+
+
+--
+-- Name: junction_tag_question_id_df7a0632; Type: INDEX; Schema: public; Owner: junction_man
+--
+
+CREATE INDEX junction_tag_question_id_df7a0632 ON public.junction_tag USING btree (question_id);
+
+
+--
+-- Name: junction_trail_question_tag_id_4cf5e605; Type: INDEX; Schema: public; Owner: junction_man
+--
+
+CREATE INDEX junction_trail_question_tag_id_4cf5e605 ON public.junction_trail_question USING btree (tag_id);
+
+
+--
+-- Name: junction_trail_question_trail_id_1589cca5; Type: INDEX; Schema: public; Owner: junction_man
+--
+
+CREATE INDEX junction_trail_question_trail_id_1589cca5 ON public.junction_trail_question USING btree (trail_id);
+
+
+--
+-- Name: junction_trail_tag_tag_id_11f7297f; Type: INDEX; Schema: public; Owner: junction_man
+--
+
+CREATE INDEX junction_trail_tag_tag_id_11f7297f ON public.junction_trail_tag USING btree (tag_id);
+
+
+--
+-- Name: junction_trail_tag_trail_id_e8ad967d; Type: INDEX; Schema: public; Owner: junction_man
+--
+
+CREATE INDEX junction_trail_tag_trail_id_e8ad967d ON public.junction_trail_tag USING btree (trail_id);
+
+
+--
 -- Name: auth_group_permissions auth_group_permissio_permission_id_84c5c92e_fk_auth_perm; Type: FK CONSTRAINT; Schema: public; Owner: junction_man
 --
 
@@ -7687,6 +8452,46 @@ ALTER TABLE ONLY public.junction_counter
 
 ALTER TABLE ONLY public.junction_park_visitors
     ADD CONSTRAINT junction_park_visitors_trail_id_8381df0f_fk_junction_counter_id FOREIGN KEY (trail_id) REFERENCES public.junction_counter(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: junction_tag junction_tag_question_id_df7a0632_fk_junction_question_id; Type: FK CONSTRAINT; Schema: public; Owner: junction_man
+--
+
+ALTER TABLE ONLY public.junction_tag
+    ADD CONSTRAINT junction_tag_question_id_df7a0632_fk_junction_question_id FOREIGN KEY (question_id) REFERENCES public.junction_question(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: junction_trail_question junction_trail_quest_trail_id_1589cca5_fk_junction_; Type: FK CONSTRAINT; Schema: public; Owner: junction_man
+--
+
+ALTER TABLE ONLY public.junction_trail_question
+    ADD CONSTRAINT junction_trail_quest_trail_id_1589cca5_fk_junction_ FOREIGN KEY (trail_id) REFERENCES public.junction_counter(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: junction_trail_question junction_trail_question_tag_id_4cf5e605_fk_junction_question_id; Type: FK CONSTRAINT; Schema: public; Owner: junction_man
+--
+
+ALTER TABLE ONLY public.junction_trail_question
+    ADD CONSTRAINT junction_trail_question_tag_id_4cf5e605_fk_junction_question_id FOREIGN KEY (tag_id) REFERENCES public.junction_question(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: junction_trail_tag junction_trail_tag_tag_id_11f7297f_fk_junction_tag_id; Type: FK CONSTRAINT; Schema: public; Owner: junction_man
+--
+
+ALTER TABLE ONLY public.junction_trail_tag
+    ADD CONSTRAINT junction_trail_tag_tag_id_11f7297f_fk_junction_tag_id FOREIGN KEY (tag_id) REFERENCES public.junction_tag(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: junction_trail_tag junction_trail_tag_trail_id_e8ad967d_fk_junction_counter_id; Type: FK CONSTRAINT; Schema: public; Owner: junction_man
+--
+
+ALTER TABLE ONLY public.junction_trail_tag
+    ADD CONSTRAINT junction_trail_tag_trail_id_e8ad967d_fk_junction_counter_id FOREIGN KEY (trail_id) REFERENCES public.junction_counter(id) DEFERRABLE INITIALLY DEFERRED;
 
 
 --
