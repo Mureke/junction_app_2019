@@ -14,20 +14,19 @@
     cursor: pointer;
 
     button {
-      @include button;
+      @include icon-button;
       height: 50px;
       width: 50px;
       border-radius: 50%;
       align-items: center;
-      background: $deactive;
-
-      &.selected {
-        background: $primary-active;
-      }
     }
 
     p {
       font-size: $font-caption;
+
+      &.selected {
+        color: $primary-active;
+      }
     }
   }
 }

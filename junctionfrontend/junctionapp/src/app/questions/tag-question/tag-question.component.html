@@ -2,7 +2,7 @@
 
 <div class="tags">
   <div class="tag" (click)="setSelection(tag.id)" *ngFor="let tag of question.tags">
-    <button [ngClass]="{'selected': selectedTags.indexOf(tag.id) !== -1}">{{tag.id}}</button>
-    <p class="caption">{{tag.name}}</p>
+    <button [ngClass]="{'selected': selectedTags.indexOf(tag.id) !== -1}"><span [innerHTML]="tag.icon_url"></span></button>
+    <p class="caption" [ngClass]="{'selected': selectedTags.indexOf(tag.id) !== -1}">{{tag.name}}</p>
   </div>
 </div>

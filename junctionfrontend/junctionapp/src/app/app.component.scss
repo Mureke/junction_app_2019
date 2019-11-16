@@ -31,6 +31,7 @@ header {
   position: relative;
   height: calc(630px - 94px);
   background: none;
+  overflow: hidden;
 
   app-intoduction,
   app-info,
@@ -42,6 +43,10 @@ header {
     height: 100%;
     position: relative;
     z-index: 2;
+  }
+
+  app-postcards {
+    overflow-y: auto;
   }
 }
 

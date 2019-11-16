@@ -19,9 +19,54 @@
   font-weight: 700;
   display: flex;
   justify-content: center;
-
+  
   &:active,
   &:hover {
     background: $primary-active;
+  }
+}
+
+@mixin icon-button {
+  @include button;
+  background: $light;
+  border: 2px solid $dark-deactive;
+  box-shadow: 2px 2px 2px $dark-deactive;
+
+  &:active,
+  &:hover {
+    background: $deactive;
+  }
+
+  &:active,
+  &.selected {
+    border-color: $primary-active;
+    box-shadow: 2px 2px 2px $deactive, 2px 2px 2px $primary-active;
+  }
+}
+
+@mixin tags {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  
+  button, div {
+    @include icon-button;
+    box-sizing: auto;
+    padding: 0;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    align-items: center;
+    background: $deactive;
+  }
+
+  p {
+    font-size: $font-caption;
+    color: $dark-deactive;
+
+    &.selected {
+      color: $primary-active;
+    }
   }
 }

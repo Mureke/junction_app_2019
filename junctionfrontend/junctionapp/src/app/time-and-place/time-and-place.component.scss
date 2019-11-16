@@ -1,8 +1,9 @@
+@import '../../assets/styles/variables';
 @import '../../assets/styles/mixins';
 
 h2 {
   text-align: center;
-  color: #717673;
+  color: $dark-deactive;
   font-weight: 700;
 }
 
@@ -22,12 +23,11 @@ h2:first-child, h2:nth-child(4) {
   input {
     @include button;
     background: transparent;
-    border: 1px solid #717673;
-    box-shadow: 2px 2px 2px #717673;
-    color: #717673;
+    border: 1px solid $dark-deactive;
+    box-shadow: 2px 2px 2px $dark-deactive;
+    color: $dark-deactive;
 
-    &:hover,
-    &:active {
+    &:hover {
       background: transparent;
     }
   }
@@ -49,28 +49,7 @@ h2:first-child, h2:nth-child(4) {
   justify-content: space-evenly;
 
   .season, .park {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    cursor: pointer;
-
-    button {
-      @include button;
-      height: 50px;
-      width: 50px;
-      border-radius: 50%;
-      align-items: center;
-      background: $deactive;
-
-      &.selected {
-        background: $primary-active;
-      }
-    }
-
-    p {
-      font-size: $font-caption;
-      color: #717673;
-    }
+    @include tags;
   }
 }
 
