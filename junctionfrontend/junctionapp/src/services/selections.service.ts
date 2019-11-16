@@ -8,7 +8,8 @@ export class SelectionsService {
   private selections: Selections = {
     start_date: null,
     end_date: null,
-    park: 0
+    park: null,
+    trip_length: null,
   };
   private state = new BehaviorSubject(this.selections);
   public state$ = this.state.asObservable();
