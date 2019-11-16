@@ -7,21 +7,29 @@
   height: 100%;
   position: relative;
   align-items: center;
+  text-align: center;
 
   .caption {
     font-size: $font-caption;
     margin: 0;
   }
 
+  .bold {
+    font-weight: 700;
+  }
+
+  h2 {
+    margin: 96px 0 24px;
+  }
+
   button {
     @include button;
-    display: flex;
-    align-items: center;
+    width: 335px;
 
     &.text-button {
-      color: #000;
-      background: transparent;
-      border: none;
+      @include text-button;
+      position: absolute;
+      bottom: 48px;
     }
   }
 }

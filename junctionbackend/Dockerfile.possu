@@ -1,0 +1,10 @@
+FROM mdillon/postgis
+
+ENV POSTGRES_PASSWORD pass
+ENV POSTGRES_DB junction
+
+EXPOSE 9876
+
+ADD possu.sql /docker-entrypoint-initdb.d/
+
+
