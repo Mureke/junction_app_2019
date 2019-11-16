@@ -18,6 +18,7 @@ class Trail(models.Model):
     name = models.CharField(max_length=300, unique=True)
     location = models.PointField(null=False)
     national_park = models.ForeignKey('NationalPark', on_delete=models.CASCADE)
+    length = models.IntegerField(default=0)
 
     def get_visits(self, start_date, end_date):
         date = datetime.datetime.strptime(start_date, '%Y-%m-%d')
