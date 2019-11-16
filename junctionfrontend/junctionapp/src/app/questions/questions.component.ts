@@ -16,10 +16,9 @@ export class QuestionsComponent {
       current_selection_help_text: 'nights selected',
       key: 'trip_length',
       slider: true,
-      minLabel: '0 nights',
-      maxLabel: '14 nights',
-      rangeMin: 0,
-      rangeMax: 14
+      min_label: '0 nights',
+      max_label: '14 nights',
+      range_length: 14
     },
     {
       question: 'Which activities interest you?',
@@ -31,23 +30,49 @@ export class QuestionsComponent {
     {
       question: 'My goal is to...',
       current_selection_help_text: false,
-      key: 'trip_length',
+      key: 'chill_level',
       slider: true,
       minLabel: 'Chill',
       maxLabel: 'Excercise',
-      rangeMin: 0,
-      rangeMax: 2
+      range_length: 2
     },
     {
-      question: 'I want to',
+      question: 'My skill level is',
       current_selection_help_text: false,
-      key: 'trip_length',
+      key: 'skill_level',
       slider: true,
-      minLabel: 'Chill',
-      maxLabel: 'Excercise',
-      rangeMin: 0,
-      rangeMax: 2
+      minLabel: 'All thumbs',
+      maxLabel: 'Swiss knife',
+      range_length: 2
     },
+    {
+      question: 'Which do you prefer?',
+      current_selection_help_text: '',
+      key: 'nature',
+      slider: false,
+      tags: ['Deciduous forest', 'Pine forrest', 'Spruce forrest']
+    },
+    {
+      question: 'My travelling posse is..',
+      current_selection_help_text: '',
+      key: 'posse',
+      slider: false,
+      tags: ['Single or a pair', 'Group', 'Large group', 'With children']
+    },
+    {
+      question: 'Please notice my special needs for',
+      current_selection_help_text: '',
+      key: 'accessibility',
+      slider: false,
+      tags: ['Accessibility', 'Medical care']
+    },
+    {
+      question: 'I\'m travelling with',
+      current_selection_help_text: '',
+      key: 'vehicle',
+      slider: false,
+      tags: ['own car', 'public transport', 'I don\'t know']
+    }
   ];
   public question = this.questions[this.questionIndex];
 
