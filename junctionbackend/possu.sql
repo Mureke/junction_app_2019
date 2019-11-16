@@ -43,6 +43,8 @@ CREATE TABLE public.auth_group (
     name character varying(150) NOT NULL
 );
 
+CREATE USER junction_man;
+ALTER USER junction_man WITH PASSWORD 'pass';
 
 ALTER TABLE public.auth_group OWNER TO junction_man;
 
