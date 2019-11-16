@@ -15,6 +15,8 @@ export class PostcardsComponent implements OnInit, OnDestroy {
 
   private selectionSubscription: Subscription;
   public trails: any;
+  public selectedTrail: object;
+  public selections: Selections;
 
   constructor(private dataService: FetchDataService, private selectionService: SelectionsService) {
   }
@@ -22,6 +24,7 @@ export class PostcardsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.selectionSubscription = this.selectionService.state$.subscribe((selections: Selections) => {
       this.getTrails(selections);
+      this.selections = selections;
     });
   }
 
