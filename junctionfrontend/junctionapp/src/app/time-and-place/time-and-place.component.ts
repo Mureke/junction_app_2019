@@ -2,6 +2,7 @@ import { Component, Output, EventEmitter, OnInit, OnDestroy } from '@angular/cor
 import { SelectionsService } from 'src/services/selections.service';
 import { Subscription } from 'rxjs';
 import { FetchDataService } from 'src/services/fetch-data.service';
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'app-time-and-place',
@@ -36,7 +37,7 @@ export class TimeAndPlaceComponent implements OnInit, OnDestroy {
   }
 
   async getParks() {
-    this.parks = await this.fetcDataService.fetchDataGet('http://localhost:8000/api/national-park/');
+    this.parks = await this.fetcDataService.fetchDataGet(environment.backendUrl + '/api/national-park/');
   }
 
   changeView(view: number) {
