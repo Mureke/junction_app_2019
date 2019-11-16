@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'junctionapp';
+  public readonly title = 'junctionapp';
+  public currentView = 0;
+
+  handleViewChange(view: number) {
+    this.currentView = view;
+  }
 }

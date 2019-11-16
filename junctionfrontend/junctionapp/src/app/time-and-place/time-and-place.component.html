@@ -1,0 +1,17 @@
+<input #start_date type="date" name="start_date" id="start_date" (change)="setSelection('start_date', start_date.value)">
+<input #end_date type="date" name="end_date" id="end_date" (change)="setSelection('end_date', end_date.value)">
+
+<div class="season-container">
+  <button id="spring" [class]="{'selected': spring}">Spring</button>
+  <button id="summer" [class]="{'selected': summer}">Summer</button>
+  <button id="autumn" [class]="{'selected': autumn}">Autumn</button>
+  <button id="winter" [class]="{'selected': winter}">Winter</button>
+</div>
+
+<div class="national-parks">
+  <button (click)="setSelection('park', 34361)">Pallas / Ylläs</button>
+  <button (click)="setSelection('park', 852)">Nuuksio</button>
+  <button (click)="setSelection('park', 0)">Don't know yet</button>
+</div>
+
+<button (click)="changeView(3)">That's all folks!</button>
