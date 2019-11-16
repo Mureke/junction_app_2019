@@ -57,8 +57,8 @@
 
 <div class="national-parks">
   <div class="park" (click)="setSelection('park', park.id)" *ngFor="let park of parks">
-    <button [ngClass]="{'selected': selections['park'] === park.id}">{{park.id}}</button>
-    <p class="caption" [ngClass]="{'selected': selections.park === park.id}">{{park.name}}</p>
+    <button [ngClass]="{'selected': selections['park'] === park.id}">{{park['id']}}</button>
+    <p class="caption" [ngClass]="{'selected': selections['park'] === park['id']}">{{park['name']}}</p>
   </div>
 </div>
 
