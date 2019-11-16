@@ -1,1 +1,5 @@
-<p>questions works!</p>
+<div class="questions-container">
+    <app-slider-question [question]="question" *ngIf="question.slider"></app-slider-question>
+</div>
+
+<button (click)="next()">Continue</button>

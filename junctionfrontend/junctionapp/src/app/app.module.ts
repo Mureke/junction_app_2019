@@ -7,6 +7,7 @@ import { InfoComponent } from './info/info.component';
 import { TimeAndPlaceComponent } from './time-and-place/time-and-place.component';
 import { QuestionsComponent } from './questions/questions.component';
 import { PostcardsComponent } from './postcards/postcards.component';
+import { SliderQuestionComponent } from './questions/slider-question/slider-question.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { PostcardsComponent } from './postcards/postcards.component';
     InfoComponent,
     TimeAndPlaceComponent,
     QuestionsComponent,
-    PostcardsComponent
+    PostcardsComponent,
+    SliderQuestionComponent
   ],
   imports: [
     BrowserModule

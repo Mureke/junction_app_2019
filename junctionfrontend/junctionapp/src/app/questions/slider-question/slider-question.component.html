@@ -1,0 +1,19 @@
+<h2>{{question.question}}</h2>
+
+<p>{{currentSelecion}} {{question.current_selection_help_text}}</p>
+
+<div class="labels">
+  <p>{{question.minLabel}}</p>
+  <p>{{question.maxLabel}}</p>
+</div>
+
+<input
+  #range
+  type="range"
+  name="range"
+  id="range"
+  step="1"
+  min="{{question.rangeMin}}"
+  max="{{question.rangeMax}}"
+  value="0"
+  (change)="setSelection(question.key, range.value)">
