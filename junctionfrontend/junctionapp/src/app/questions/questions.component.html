@@ -2,8 +2,8 @@
 <p class="caption skip" (click)="next()">skip</p>
 
 <div class="questions-container">
-  <app-slider-question [question]="question" *ngIf="question.slider"></app-slider-question>
-  <app-tag-question [question]="question" *ngIf="!question.slider"></app-tag-question>
+  <app-slider-question [question]="question" *ngIf="question && question.slider"></app-slider-question>
+  <app-tag-question [question]="question" *ngIf="question && !question.slider"></app-tag-question>
 </div>
 
 <button (click)="next()">Continue</button>
