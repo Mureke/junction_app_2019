@@ -12,9 +12,9 @@ export class PostcardsComponent implements OnInit {
   @Output()
   viewEmitter: EventEmitter<number> = new EventEmitter();
 
-  private trails: any;
+  public trails: any;
 
-  private selectionSubscription: any;
+  public selectionSubscription: any;
 
   constructor(private dataService: FetchDataService, private selectionService: SelectionsService) {
   }

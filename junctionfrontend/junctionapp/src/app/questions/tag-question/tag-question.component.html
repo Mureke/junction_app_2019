@@ -1,7 +1,7 @@
-<h2>{{question.question}}</h2>
+<h2>{{question['question']}}</h2>
 
 <div class="tags">
-  <div class="tag" (click)="setSelection(tag.id)" *ngFor="let tag of question.tags">
+  <div class="tag" (click)="setSelection(tag.id)" *ngFor="let tag of question['tags']">
     <button [ngClass]="{'selected': selectedTags.indexOf(tag.id) !== -1}">{{tag.id}}</button>
     <p class="caption">{{tag.name}}</p>
   </div>
