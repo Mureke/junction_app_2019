@@ -10,13 +10,13 @@
     text-align: center;
     font-weight: 700;
   }
-  
+
   .post-card {
     background: $light;
     box-shadow: -4px 6px 11px $dark-deactive;
     border-radius: 4px;
     margin-bottom: 48px;
-  
+
     .post-card-image {
       width:100%;
       height: auto;
@@ -25,6 +25,37 @@
     h4 {
       margin: 0;
       padding: 24px;
+    }
+
+    .traffic-light {
+      margin: 0;
+      padding: 0 24px;
+      display: flex;
+      flex-direction: row;
+      font-size: $font-caption;
+      font-weight: 700;
+      align-items: center;
+
+      .green {
+        height: 24px;
+        width: 24px;
+        border-radius: 50%;
+        background: $primary-default;
+      }
+
+      .yellow {
+        height: 24px;
+        width: 24px;
+        border-radius: 50%;
+        background: yellow;
+      }
+
+      .red {
+        height: 24px;
+        width: 24px;
+        border-radius: 50%;
+        background: red;
+      }
     }
 
     .tags {

@@ -3,6 +3,15 @@
   <div class="post-card" (click)="selectedTrail = trail" *ngFor="let trail of trails">
     <img class="post-card-image" src="https://www.napsu.fi/images/artikkelit/117-0.jpg?v=1">
     <h4>{{trail['name']}}</h4>
+    <p class="traffic-light" *ngIf="trail['visits'] < 300">
+      <span class="green"></span>&emsp;Extremely peacuful
+    </p>
+    <p class="traffic-light" *ngIf="trail['visits'] >= 300 && trail['visits'] < 1000">
+      <span class="yellow"></span>&emsp;Peaceful
+    </p>
+    <p class="traffic-light"  *ngIf="trail['visits'] >= 1000">
+      <span class="red"></span>&emsp;Busy
+    </p>
     <div class="tags">
       <div class="tag" *ngFor="let tag of trail.tags"><span [innerHTML]="tag.icon_url"></span></div>
     </div>

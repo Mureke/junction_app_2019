@@ -7,8 +7,15 @@
       <p>Suggested start</p>
       <h3>{{date}} <span class="primary">10:00</span></h3>
     </div>
-    <p class="traffic-light"><span class="green"></span>&emsp;Extremely peacuful</p>
-    <div class="links">
+    <p class="traffic-light" *ngIf="trail['visits'] < 300">
+      <span class="green"></span>&emsp;Extremely peacuful
+    </p>
+    <p class="traffic-light" *ngIf="trail['visits'] >= 300 && trail['visits'] < 1000">
+      <span class="yellow"></span>&emsp;Peaceful
+    </p>
+    <p class="traffic-light"  *ngIf="trail['visits'] >= 1000">
+      <span class="red"></span>&emsp;Busy
+    </p>    <div class="links">
       <p class="link">Save this route</p>
       <p class="link">Arriving instructions</p>
     </div>
