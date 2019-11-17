@@ -55,7 +55,7 @@ h2:first-child, h2:nth-child(4), h2:nth-child(6) {
 
 .continue {
   @include button;
-  width: 335px;
+  width: 80%;
   margin: 24px auto 0;
 
   &.deactive {

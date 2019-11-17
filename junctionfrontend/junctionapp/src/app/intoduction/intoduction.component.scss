@@ -24,7 +24,7 @@
 
   button {
     @include button;
-    width: 335px;
+    width: 80%;
 
     &.text-button {
       @include text-button;
