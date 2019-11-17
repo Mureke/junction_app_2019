@@ -43,6 +43,7 @@ export class QuestionsComponent implements OnInit, OnDestroy {
       } else {
         this.questionIndex--;
         this.question = this.questions[this.questionIndex];
+        this.sanitizeQuestion();
       }
     }
   }
