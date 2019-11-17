@@ -28,7 +28,7 @@
 
     &.text-button {
       @include text-button;
-      position: absolute;
+      position: fixed;
       bottom: 48px;
     }
   }

@@ -55,6 +55,8 @@
   </div>
 </div>
 
+<h2>Choose the national park<br>you're looking to visit</h2>
+
 <div class="national-parks">
   <div class="park" (click)="setSelection('park', park.id)" *ngFor="let park of parks">
     <button [ngClass]="{'selected': selections['park'] === park.id}">{{park['id']}}</button>

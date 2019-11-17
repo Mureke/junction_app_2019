@@ -42,11 +42,19 @@ export class PostcardsComponent implements OnInit, OnDestroy {
         return tag;
       });
     });
-    console.log(this.trails);
-    
   }
 
   changeView(view: number) {
     this.viewEmitter.emit(view);
+  }
+
+  toggleTrailModal(selectedTrail = null) {
+    this.selectedTrail = selectedTrail;
+
+    if (selectedTrail) {
+      document.getElementsByTagName('body')[0].style.overflow = 'hidden';
+    } else {
+      document.getElementsByTagName('body')[0].style.overflow = 'auto';
+    }
   }
 }

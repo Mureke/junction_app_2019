@@ -29,9 +29,12 @@ header {
 
 .view-container {
   position: relative;
-  height: calc(630px - 94px);
   background: none;
-  overflow: hidden;
+  height: 100%;
+  min-height: calc(100vh - 94px);
+  width: 100%;
+  padding: 24px;
+  box-sizing: border-box;
 
   app-intoduction,
   app-info,
@@ -44,17 +47,16 @@ header {
     position: relative;
     z-index: 2;
   }
-
-  app-postcards {
-    overflow-y: auto;
-  }
 }
 
 img {
   height: auto;
-  width: 375px;
-  position: absolute;
+  width: 100%;
+  position: fixed;
+  max-width: 500px;
+  margin: 0 auto;
   bottom: 0;
   left: 0;
+  right: 0;
   z-index: 1;
 }

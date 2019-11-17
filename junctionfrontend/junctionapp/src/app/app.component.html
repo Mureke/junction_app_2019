@@ -9,6 +9,6 @@
   <app-info (viewEmitter)="handleViewChange($event)" *ngSwitchCase="1"></app-info>
   <app-time-and-place (viewEmitter)="handleViewChange($event)" *ngSwitchCase="2"></app-time-and-place>
   <app-questions (viewEmitter)="handleViewChange($event)" *ngSwitchCase="3"></app-questions>
-  <app-postcards [ngStyle]="{'margin-right.px': sideBarOffset}" (viewEmitter)="handleViewChange($event)" *ngSwitchCase="4"></app-postcards>
+  <app-postcards (viewEmitter)="handleViewChange($event)" *ngSwitchCase="4"></app-postcards>
   <img src="./assets/images/bg.png" alt="background">
 </div>

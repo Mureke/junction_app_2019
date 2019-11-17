@@ -1,6 +1,6 @@
 <div class="postcard-wrapper">
   <h2>We recommend you...</h2>
-  <div class="post-card" (click)="selectedTrail = trail" *ngFor="let trail of trails">
+  <div class="post-card" (click)="toggleTrailModal(trail)" *ngFor="let trail of trails">
     <img class="post-card-image" src="https://www.napsu.fi/images/artikkelit/117-0.jpg?v=1">
     <h4>{{trail['name']}}</h4>
     <p class="traffic-light" *ngIf="trail['visits'] < 300">
@@ -17,5 +17,5 @@
     </div>
   </div>
 
-  <app-trail-modal [trail]="selectedTrail" [date]="selections.start_date" (emitClose)="selectedTrail=null" *ngIf="selectedTrail"></app-trail-modal>
+  <app-trail-modal [trail]="selectedTrail" [date]="selections.start_date" (emitClose)="toggleTrailModal()" *ngIf="selectedTrail"></app-trail-modal>
 </div>

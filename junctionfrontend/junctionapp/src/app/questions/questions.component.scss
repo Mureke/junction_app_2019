@@ -2,7 +2,7 @@
 
 button {
   @include button;
-  position: absolute;
+  position: fixed;
   bottom: 98px;
   left: 0;
   right: 0;

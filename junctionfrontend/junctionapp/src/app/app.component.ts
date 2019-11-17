@@ -8,7 +8,6 @@ import { Component } from '@angular/core';
 export class AppComponent {
   public readonly title = 'junctionapp';
   public currentView = 0;
-  public sideBarOffset = -13;
 
   handleViewChange(view: number) {
     this.currentView = view;
