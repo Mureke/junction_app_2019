@@ -48,7 +48,7 @@ export class QuestionsComponent implements OnInit, OnDestroy {
   }
 
   next() {
-    if (this.questionIndex === 6) {
+    if (this.questionIndex === (this.questions.length - 1)) {
       this.changeView(4);
     } else {
       this.questionIndex++;
