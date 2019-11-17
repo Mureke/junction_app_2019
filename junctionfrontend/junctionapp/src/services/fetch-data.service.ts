@@ -24,9 +24,6 @@ export class FetchDataService {
       });
     } catch (error) {
       console.log(error);
-      throw error;
     }
   }
-
 }
-
