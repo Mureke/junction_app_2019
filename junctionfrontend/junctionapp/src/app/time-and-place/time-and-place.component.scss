@@ -51,11 +51,16 @@ h2:first-child, h2:nth-child(4), h2:nth-child(6) {
   .season, .park {
     @include tags;
   }
+
+  .park {
+    max-width: 40vw;
+    text-align: center;
+  }
 }
 
 .continue {
   @include button;
-  width: 80%;
+  width: 95%;
   margin: 24px auto 0;
 
   &.deactive {
