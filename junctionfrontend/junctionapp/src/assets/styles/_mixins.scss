@@ -28,13 +28,13 @@
 
 @mixin icon-button {
   @include button;
-  background: $light;
+  background: #FAFCFB;
   border: 2px solid $dark-deactive;
   box-shadow: 2px 2px 2px $dark-deactive;
 
   &:active,
   &:hover {
-    background: $deactive;
+  background: #FAFCFB;
   }
 
   &:active,
@@ -58,7 +58,6 @@
     width: 50px;
     border-radius: 50%;
     align-items: center;
-    background: $deactive;
   }
 
   p {

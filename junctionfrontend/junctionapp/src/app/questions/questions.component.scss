@@ -10,10 +10,12 @@ button {
 .caption {
   font-size: $font-caption;
   position: absolute;
-  top: -94px;
+  top: -118px;
+  left: -23px;
   margin: 10px;
 
   &.skip {
-    right: 10px;
+    right: -24px;
+    left: auto;
   }
 }
