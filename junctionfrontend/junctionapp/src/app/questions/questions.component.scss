@@ -13,9 +13,10 @@ button {
   top: -118px;
   left: -23px;
   margin: 10px;
+  cursor: pointer;
 
   &.skip {
-    right: -24px;
+    right: -14px;
     left: auto;
   }
 }
