@@ -1,6 +1,6 @@
-#Junction backend
+# Junction backend
 
-###How to run:
+### How to run locally:
 1. Install docker (instructions in the interwebs)
     2. `docker pull mdillon/postgis`
     3. `docker run --name possu-postgres -p 9876:5432 -e POSTGRES_PASSWORD=pass -d mdillon/postgis`
